@@ -1,0 +1,48 @@
+#!/bin/bash
+
+basedir=""
+
+#check system,This script must be run on CentOS/RHEL only.
+############################################################################
+if [ ! -f /etc/redhat-release ]; then
+    echo "[ERROR]: Sorry, this script is for CentOS/RHEL only."
+    exit 1
+fi
+#check basedir
+#############################################################################
+if test -z "$basedir"
+then
+  basedir=/usr/local/mysqlmtop
+else
+  basedir="$basedir"
+fi
+
+arg=$1
+case "$arg" in
+  'start')
+    #start mtop
+    cd $basedir && nohup ./mtop.py & > /dev/null 2>&1
+  ;;
+  'stop')
+    #stop mtop
+    killall python & > /dev/null 2>&1 
+  ;;
+  '--help')
+    #for help
+    echo "mysql mtop help:"
+    echo "support-site:www.mtop.cc  www.ruzuojun.com"
+    echo "===================================================================="
+    echo "start        Start mysql mtop monitor server; Command: #mtopctl start"
+    echo "stop         Stop mysql mtop monitor server; Command: #mtopctl stop"
+  ;;
+    *)
+        echo "Please input  --help to read the help info."
+    ;;
+
+esac
+
+exit 0  
+  
+
+
+
