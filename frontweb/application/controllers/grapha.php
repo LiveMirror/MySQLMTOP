@@ -3,10 +3,10 @@
 class Grapha extends Front_Controller {
     function __construct(){
 		parent::__construct();
+        ini_set("include_path", "D:/wwwroot/mysqlmtop/frontweb/public");
 		$this->load->model("mysql_model","mysql");
         $this->load->model('application_model','app');
-        $this->load->model('servers_model','server');
-        
+        $this->load->model('servers_model','server');   
 	}
     
     

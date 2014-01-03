@@ -79,7 +79,7 @@
 <div class="container-fluid">
     <hr>
     <footer>
-        <p>&copy; Yihaodian DBA Team  2013</p>
+        <p>&copy; MySQL MTOP 2013  <a href="http://www.mtop.cc" target="_blank">www.mtop.cc</a> 版权所有</p>
     </footer>
 </div>
 
