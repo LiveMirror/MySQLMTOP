@@ -51,7 +51,6 @@ class User extends CI_Controller  {
 						//记录session
 						$newdata = array(
 								'uid'=>$user_data['id'],
-								'email'  => $user_data['email'],
 								'login_count'     => $user_data['login_count'],
 								'last_login_ip'     => $user_data['last_login_ip'],
 								'last_login_time'     => $user_data['last_login_time'],

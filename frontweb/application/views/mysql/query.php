@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="page-header">
-  <h2>MySQL SQL慢查询监控平台<small> &nbsp;&nbsp;最新检测时间：<?php echo $datalist[0]['create_time'] ?> (每30秒采集1次数据)</small></h2>
+  <h2>MySQL SQL慢查询监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} ?> (每30秒采集1次数据)</small></h2>
 </div>
 
 
