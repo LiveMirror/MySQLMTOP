@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
-<title>MySQL MTOP 开源的MySQL企业级监控系统</title>
+<title>MySQLMTOP 开源的MySQL企业级监控系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,16 +31,24 @@
 
     <div class="navbar  navbar-fixed-top">
       <div class="navbar-inner">
-      <div class="container">
         <div class="container-fluid">
           <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="<?php echo site_url('index/index') ?>">MTOP</a>
+          <a class="brand" href="<?php echo site_url('index/index') ?>">MySQLMTOP</a>
           <div class="nav-collapse collapse">
-             
+<?php  if($this->session->userdata('logged_in')!=1) {?>
+ <p class="navbar-text pull-right">
+ <a href='<?php echo site_url('user/login') ?>' class="btn-success  btn">登录</a>
+ </p>
+<?php } else{ ?>
+ <p class="navbar-text pull-right">
+  <a href="<?php echo site_url('user/logout')?>" class="btn-success btn">退出</a>
+ </p>
+<?php }?>
+
              <ul class="nav">
                 <li class="dropdown">
 				   <a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理</a>
@@ -67,7 +75,6 @@
  
           </div><!--/.nav-collapse -->
         </div>
-      </div>
       </div>
     </div>
 <div style="height: 50px;"></div>
