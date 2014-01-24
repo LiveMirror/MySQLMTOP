@@ -55,11 +55,11 @@
     <tr style="font-size: 13px;">
 		<td><input type="text" name="host_<?php echo $n ?>" class="input-small" placeholder="IP或域名"></td>
         <td><input type="text" name="port_<?php echo $n ?>" class="input-mini" placeholder="端口"></td>
-        <td><select name="application_<?php echo $n ?>" id="application_<?php echo $n ?>" class="input-medium">
+        <td><select name="application_id_<?php echo $n ?>" id="application_id_<?php echo $n ?>" class="input-medium">
         <option value=""  >选择应用</option>
         <?php if(!empty($application)) {?>
         <?php foreach ($application  as $item):?>
-         <option value="<?php echo $item['name']?>"  ><?php echo $item['name']?>(<?php echo $item['display_name']?>)</option>
+         <option value="<?php echo $item['id']?>"  ><?php echo $item['name']?>(<?php echo $item['display_name']?>)</option>
         <?php endforeach;?>
         <?php } ?>
         </select></td>

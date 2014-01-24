@@ -42,11 +42,11 @@
    <div class="control-group">
     <label class="control-label" for="">选择应用</label>
     <div class="controls">
-        <select name="application" id="application">
+        <select name="application_id" id="application_id">
         <option value=""  >选择应用</option>
         <?php if(!empty($application)) {?>
         <?php foreach ($application  as $item):?>
-         <option value="<?php echo $item['name']?>"  ><?php echo $item['name']?>(<?php echo $item['display_name']?>)</option>
+         <option value="<?php echo $item['id']?>"  ><?php echo $item['name']?>(<?php echo $item['display_name']?>)</option>
         <?php endforeach;?>
         <?php } ?>
         </select>

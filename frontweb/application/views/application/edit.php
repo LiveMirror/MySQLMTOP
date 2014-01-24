@@ -32,7 +32,7 @@
     </div>
    </div>
     <div class="control-group">
-    <label class="control-label" for="">*中文名称</label>
+    <label class="control-label" for="">*显示名称</label>
     <div class="controls">
       <input type="text" id=""  name="display_name" value="<?php echo $record['display_name']; ?>" >
     </div>

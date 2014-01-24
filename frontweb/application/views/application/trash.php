@@ -22,7 +22,7 @@
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th>应用名称</th>
-        <th>中文名称</th>
+        <th>显示名称</th>
 		<th>是否启用</th>
         <th>管理</th>
 	</tr>
