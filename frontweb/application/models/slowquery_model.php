@@ -1,7 +1,6 @@
 <?php 
 class Slowquery_model extends CI_Model{
 
-    
 
 
 	function get_total_rows($table){
@@ -17,23 +16,6 @@ class Slowquery_model extends CI_Model{
 		}
 	}
     
-    function get_total_record_paging($table,$limit,$offset){
-        $query = $this->db->get($table,$limit,$offset);
-		if ($query->num_rows() > 0)
-		{
-			return $query->result_array();
-		}
-	}
-    
-    function get_total_record_sql($sql){
-        $query = $this->db->query($sql);
-        if ($query->num_rows() > 0)
-		{
-			$result['datalist']=$query->result_array();
-            $result['datacount']=$query->num_rows();
-            return $result;
-		}
-    }
 	
     function get_total_record_slowquery(){
         
@@ -50,19 +32,19 @@ class Slowquery_model extends CI_Model{
     
    
 
-	function get_data_by_id($id){
-		$query = $this->db->get_where($this->table, array('id' =>$id));
+	function get_record_by_checksum($checksum){
+	    $this->db->select('s.*,sh.*');
+        $this->db->from('mysql_slow_query_review s');
+        $this->db->join('mysql_slow_query_review_history sh', 's.checksum=sh.checksum');
+		$this->db->where('s.checksum',$checksum);
+        $query = $this->db->get();
 		if ($query->num_rows() > 0)
 		{
 			return $query->row_array();
 		}
 	}
 	
-	function update_view_count($id){
-		$this->db->set('view_count', 'view_count+1',FALSE);
-		$this->db->where('id', $id);
-		$this->db->update($this->table);
-	}
+
 
 }
 
