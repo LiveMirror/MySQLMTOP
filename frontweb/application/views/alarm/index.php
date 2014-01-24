@@ -2,17 +2,17 @@
 
 
 <div class="page-header">
-  <h2>报警事件记录平台<small> </small></h2>
+  <h2>报警事件记录平台<small></small></h2>
 </div>
 
-  
+
 <div class="ui-state-default ui-corner-all" style="height: 45px;" >
 <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-search"></span>                 
 <form name="form" class="form-inline" method="get" action="<?php site_url('mysql/status') ?>" >
- <select name="application" class="input-medium" style="">
+ <select name="application_id" class="input-medium" style="">
   <option value="">选择应用</option>
   <?php foreach ($application  as $item):?>
-  <option value="<?php echo $item['name'];?>" <?php if($setval['application']==$item['name']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
+  <option value="<?php echo $item['id'];?>" <?php if($setval['application_id']==$item['id']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
    <?php endforeach;?>
   </select>
   <select name="server_id" class="input-medium" style="" >
@@ -31,7 +31,33 @@
 
   <button type="submit" class="btn btn-success">检索</button>
   <a href="<?php echo site_url('alarm/index') ?>" class="btn btn-warning">重置</a>
-  
+   &nbsp;
+  <label class="checkbox">自动刷新
+    <div class="make-switch" data-on="primary" data-off="danger" data-on-label="ON" data-text-label="">
+    <input type="checkbox" name="reflesh" id="reflesh" value="" checked="checked" >
+    </div>
+  </label>
+  <script type="text/javascript">
+    function reflesh(){
+        //var check_status=$("#reflesh").attr("checked");
+        //alert(check_status);
+        var arrays = new Array();   //创建一个数组对象
+        var items = document.getElementsByName("reflesh");  //获取name为check的一组元素(checkbox)
+        for(i=0; i < items.length; i++){  //循环这组数据
+	       if(items[i].checked){      //判断是否选中
+		    arrays.push(items[i].value);  //把符合条件的 添加到数组中. push()是javascript数组中的方法.
+	       }
+        }
+        //alert( "选中的个数为："+arrays.length  );
+        check_count=arrays.length;
+
+        if (check_count==1){ //判断选择框是否选中
+                document.location.reload();    
+        }
+	}
+	setInterval("reflesh()",10*1000);//每10秒钟刷新一次 
+    </script>
+
 </form>
                     
 </div>
@@ -78,3 +104,4 @@
 	<?php echo $this->pagination->create_links(); ?>
   </ul>
 </div>
+

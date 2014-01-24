@@ -2,17 +2,23 @@
 
 
 <div class="page-header">
-  <h2>MySQL 健康状态监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} ?> (每30秒采集1次数据)</small></h2>
+  <h2>MySQL 状态监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} else {echo "监控进程未启动或异常";} ?> </small></h2>
 </div>
 
+<div class="ui-widget">
+<div class="ui-state-highlight      ui-corner-all">
+<p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
+MySQLMTOP温馨提示：1.监控频率请在系统管理里面进行配置; 2.启动自动刷新后每30秒刷新一次; 3.偶尔有无数据情况，是监控进程正在采集数据，为正常状态。</p>
+</div>
+</div>
   
 <div class="ui-state-default ui-corner-all" style="height: 45px;" >
 <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-search"></span>                 
-<form name="form" class="form-inline" method="get" action="<?php site_url('mysql/status') ?>" >
- <select name="application" class="input-medium" style="">
+<form name="form" class="form-inline" method="get" action="<?php site_url('monitor/status') ?>" >
+ <select name="application_id" class="input-medium" style="">
   <option value="">选择应用</option>
   <?php foreach ($application  as $item):?>
-  <option value="<?php echo $item['name'];?>" <?php if($setval['application']==$item['name']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
+  <option value="<?php echo $item['id'];?>" <?php if($setval['application_id']==$item['id']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
    <?php endforeach;?>
   </select>
   <select name="server_id" class="input-medium" style="" >
@@ -54,8 +60,11 @@
   <option value="uptime" <?php if($setval['order']=='uptime') echo "selected"; ?> >运行时间</option>
   <option value="active" <?php if($setval['order']=='active') echo "selected"; ?> >活动连接</option>
   <option value="connections" <?php if($setval['order']=='connections') echo "selected"; ?> >总连接数</option>
+  <option value="Bytes_received" <?php if($setval['order']=='Bytes_received') echo "selected"; ?> >接收流量</option>
+  <option value="Bytes_sent" <?php if($setval['order']=='Bytes_sent') echo "selected"; ?> >发送流量</option>
   <option value="QPS" <?php if($setval['order']=='QPS') echo "selected"; ?> >QPS</option>
   <option value="TPS" <?php if($setval['order']=='TPS') echo "selected"; ?> >TPS</option>
+
   </select>
   <select name="order_type" class="input-small" style="width: 110px;">
   <option value="asc" <?php if($setval['order_type']=='asc') echo "selected"; ?> >默认升序</option>
@@ -63,7 +72,7 @@
   </select>
 
   <button type="submit" class="btn btn-success">检索</button>
-  <a href="<?php echo site_url('mysql/status') ?>" class="btn btn-warning">重置</a>
+  <a href="<?php echo site_url('monitor/status') ?>" class="btn btn-warning">重置</a>
   &nbsp;
   <label class="checkbox">自动刷新
     <div class="make-switch" data-on="primary" data-off="danger" data-on-label="ON" data-text-label="">
@@ -88,7 +97,7 @@
                 document.location.reload();    
         }
 	}
-	setInterval("reflesh()",60*1000);//每10秒钟刷新一次 
+	setInterval("reflesh()",30*1000);//每30秒钟刷新一次 
     </script>
 
 </form>
@@ -99,8 +108,7 @@
 <table class="table table-hover table-striped  table-bordered table-condensed"  >
 	<tr>
         <th>应用</th>
-        <th>主机</th>
-        
+        <th>主机</th>  
 		<th>状态</th>
         <th>运行时间</th>
 		<th>版本</th>
@@ -108,8 +116,8 @@
         <th>活动连接</th>
         <th>QPS</th>
         <th>TPS</th>
-        <th>接收流量</th>
-        <th>发送流量</th>
+        <th>接收流量/秒</th>
+        <th>发送流量/秒</th>
         <th>图表</th>
 	</tr>
 	

@@ -4,14 +4,14 @@ class Alarm extends Front_Controller {
     function __construct(){
 		parent::__construct();
 	    $this->load->model("alarm_model","alarm");
-        $this->load->model("mysql_model","mysql");
+        $this->load->model("monitor_model","monitor");
         $this->load->model('application_model','app');
         $this->load->model('servers_model','server');
 	}
     
     public function index(){
         
-        !empty($_GET["application"]) && $this->db->where("application", $_GET["application"]);
+        !empty($_GET["application_id"]) && $this->db->where("application_id", $_GET["application_id"]);
         !empty($_GET["server_id"]) && $this->db->where("server_id", $_GET["server_id"]);
         !empty($_GET["level"]) && $this->db->where("level", $_GET["level"]);
         $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
@@ -37,18 +37,18 @@ class Alarm extends Front_Controller {
 		$this->pagination->initialize($config);
 		$offset = !empty($_GET['per_page']) ? $_GET['per_page'] : 1;
         
-        !empty($_GET["application"]) && $this->db->where("application", $_GET["application"]);
-        !empty($_GET["server_id"]) && $this->db->where("server_id", $_GET["server_id"]);
-        !empty($_GET["level"]) && $this->db->where("level", $_GET["level"]);
+        !empty($_GET["application_id"]) && $this->db->where("alarm.application_id", $_GET["application_id"]);
+        !empty($_GET["server_id"]) && $this->db->where("alarm.server_id", $_GET["server_id"]);
+        !empty($_GET["level"]) && $this->db->where("alarm.level", $_GET["level"]);
         $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
         $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
-        $this->db->where("create_time >=", $stime);
-        $this->db->where("create_time <=", $etime);
-        $this->db->order_by("id", "desc");
+        $this->db->where("alarm.create_time >=", $stime);
+        $this->db->where("alarm.create_time <=", $etime);
+        $this->db->order_by("alarm.id", "desc");
 
-		$data['datalist'] = $this->alarm->get_total_record_paging('alarm_history',$config['per_page'],($offset-1)*$config['per_page']);
+		$data['datalist'] = $this->alarm->get_total_record_paging($config['per_page'],($offset-1)*$config['per_page']);
         
-        $setval["application"]=isset($_GET["application"]) ? $_GET["application"] : "";
+        $setval["application_id"]=isset($_GET["application_id"]) ? $_GET["application_id"] : "";
         $setval["server_id"]=isset($_GET["server_id"]) ? $_GET["server_id"] : "";
         $setval["level"]=isset($_GET["level"]) ? $_GET["level"] : "";
         $setval["stime"]=$stime;

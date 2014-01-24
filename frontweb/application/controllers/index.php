@@ -54,7 +54,7 @@ class Index extends Front_Controller {
         
         
         $data["mysql_statistics"] = $mysql_statistics;
-        $data['last_alarm'] = $this->db->query("select * from alarm_history order by id desc limit 7 ")->result_array();
+        $data['last_alarm'] = $this->db->query("select alarm.*,servers.host,servers.port from alarm_history alarm left join servers  on alarm.server_id=servers.id  order by alarm.id desc limit 7 ")->result_array();
         $data["cur_nav"]="index_index";
         $this->layout->view("index/index",$data);
     }

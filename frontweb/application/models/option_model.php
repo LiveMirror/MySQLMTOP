@@ -22,6 +22,21 @@ class Option_model extends CI_Model{
 		}
 	}
     
+    /*
+	 * 获取单个选项
+	 */
+	function get_option_item($key){
+        $this->db->where('name',$key);
+		$query = $this->db->get($this->table);
+		if ($query->num_rows() > 0)
+		{
+	        $result=$query->row_array();
+            if($result){
+                return $result['value'];
+            }
+		}
+	}
+    
     
     /*
 	 * 更新信息

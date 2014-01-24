@@ -54,7 +54,7 @@
                 </tr>
                 
                 <tr class="info" style="font-size: 12px;">
-                  <td rowspan="2"><p class="text-center">活动进程</p></td>
+                  <td rowspan="2"><p class="text-center">活动连接</p></td>
                   <td>>5</td>
                   <td>>10</td>
                   <td>>20</td>

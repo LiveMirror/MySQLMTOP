@@ -40,7 +40,7 @@
     <tr style="font-size: 13px;">
 		<td><strong><?php echo $item['host'] ?></strong></td>
         <td><strong><?php echo $item['port'] ?></strong></td>
-        <td><?php echo $item['display_name'] ?>(<?php echo $item['application'] ?>)</td>
+        <td><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</td>
         <td><?php echo check_on_off($item['status']) ?></td>
         <td><?php echo check_on_off($item['send_mail']) ?></td>
         <td><?php echo check_on_off($item['alarm_connections']) ?></td>

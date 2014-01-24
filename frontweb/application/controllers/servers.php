@@ -13,7 +13,7 @@ class Servers extends Front_Controller {
      * 首页
      */
     public function index(){
-        $sql="select servers.*,application.display_name from servers,application where servers.application=application.name and servers.is_delete=0";
+        $sql="select servers.*,application.display_name,application.name from servers  join application on servers.application_id=application.id and servers.is_delete=0";
         $result=$this->servers->get_total_record_sql($sql);
         $data["datalist"]=$result['datalist'];
         $data["datacount"]=$result['datacount'];
@@ -25,7 +25,7 @@ class Servers extends Front_Controller {
      * 回收站
      */
     public function trash(){
-        $sql="select servers.*,application.display_name from servers,application where servers.application=application.name and servers.is_delete=1";
+        $sql="select servers.*,application.display_name,application.name from servers  join application on servers.application_id=application.id and servers.is_delete=1";
         $result=$this->servers->get_total_record_sql($sql);
         $data["datalist"]=$result['datalist'];
         $data["datacount"]=$result['datacount'];
@@ -45,7 +45,7 @@ class Servers extends Front_Controller {
         {
 			$this->form_validation->set_rules('host',  'lang:host', 'trim|required|min_length[6]|max_length[30]');
             $this->form_validation->set_rules('port',  'lang:port', 'trim|required|min_length[4]|max_length[6]|integer');
-            $this->form_validation->set_rules('application',  'lang:application', 'trim|required');
+            $this->form_validation->set_rules('application_id',  'lang:application_id', 'trim|required');
             $this->form_validation->set_rules('threshold_connections',  'lang:threshold_connections', 'trim|required|integer');
             $this->form_validation->set_rules('threshold_active',  'lang:threshold_active', 'trim|required|integer');
             $this->form_validation->set_rules('threshold_repl_delay',  'lang:threshold_repl_delay', 'trim|required|integer');
@@ -59,7 +59,7 @@ class Servers extends Front_Controller {
 					$data = array(
 						'host'=>$this->input->post('host'),
 						'port'=>$this->input->post('port'),
-					    'application'=>$this->input->post('application'),
+					    'application_id'=>$this->input->post('application_id'),
                         'status'=>$this->input->post('status'),
                         'send_mail'=>$this->input->post('send_mail'),
                         'alarm_connections'=>$this->input->post('alarm_connections'),
@@ -93,7 +93,7 @@ class Servers extends Front_Controller {
         {
             $this->form_validation->set_rules('host',  'lang:host', 'trim|required|min_length[6]|max_length[30]');
             $this->form_validation->set_rules('port',  'lang:port', 'trim|required|min_length[4]|max_length[6]|integer');
-            $this->form_validation->set_rules('application',  'lang:application', 'trim|required');
+            $this->form_validation->set_rules('application_id',  'lang:application_id', 'trim|required');
             $this->form_validation->set_rules('threshold_connections',  'lang:threshold_connections', 'trim|required|integer');
             $this->form_validation->set_rules('threshold_active',  'lang:threshold_active', 'trim|required|integer');
             $this->form_validation->set_rules('threshold_repl_delay',  'lang:threshold_repl_delay', 'trim|required|integer');
@@ -107,7 +107,7 @@ class Servers extends Front_Controller {
 					$data = array(
 						'host'=>$this->input->post('host'),
 						'port'=>$this->input->post('port'),
-					    'application'=>$this->input->post('application'),
+					    'application_id'=>$this->input->post('application_id'),
                         'status'=>$this->input->post('status'),
                         'send_mail'=>$this->input->post('send_mail'),
                         'alarm_connections'=>$this->input->post('alarm_connections'),
@@ -197,7 +197,7 @@ class Servers extends Front_Controller {
 					$data = array(
 						'host'=>$this->input->post('host_'.$n),
 						'port'=>$this->input->post('port_'.$n),
-					    'application'=>$this->input->post('application_'.$n),
+					    'application_id'=>$this->input->post('application_id_'.$n),
                         'status'=>$this->input->post('status_'.$n),
                         'send_mail'=>$this->input->post('send_mail_'.$n),
                         'alarm_connections'=>$this->input->post('alarm_connections_'.$n),

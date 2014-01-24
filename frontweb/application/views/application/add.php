@@ -32,7 +32,7 @@
     </div>
    </div>
     <div class="control-group">
-    <label class="control-label" for="">*中文名称</label>
+    <label class="control-label" for="">*显示名称</label>
     <div class="controls">
       <input type="text" id=""  name="display_name" placeholder=""  value="<?php echo set_value('display_name'); ?>" >
       <span class="help-inline">由中文或任意字符组成</span>

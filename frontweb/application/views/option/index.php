@@ -15,7 +15,7 @@
 <input type="hidden" name="submit" value="save"/> 
 
    <div class="control-group success">
-    <label class="control-label" for="">*开启全局监控</label>
+    <label class="control-label" for="">*MySQL全局监控</label>
     <div class="controls">
         <select name="monitor" id="monitor" class="input-small">
          <option value="1" <?php echo set_selected(1,$option['monitor']) ?> >开启</option>
@@ -34,6 +34,18 @@
         <span class="help-inline"></span>
     </div>
    </div>
+   
+   <div class="control-group success">
+    <label class="control-label" for="">*MySQL进程监控</label>
+    <div class="controls">
+        <select name="monitor_process" id="monitor_process" class="input-small">
+         <option value="1" <?php echo set_selected(1,$option['monitor_process']) ?> >开启</option>
+         <option value="0" <?php echo set_selected(0,$option['monitor_process']) ?> >关闭</option>
+        </select>
+        <span class="help-inline"></span>
+    </div>
+   </div>
+   
    <div class="control-group success">
     <label class="control-label" for="">*MySQL复制监控</label>
     <div class="controls">
@@ -44,17 +56,19 @@
         <span class="help-inline"></span>
     </div>
    </div>
+   
    <div class="control-group success">
-    <label class="control-label" for="">*MySQL慢查询监控</label>
+    <label class="control-label" for="">*MySQL进程管理</label>
     <div class="controls">
-        <select name="monitor_slow_query" id="monitor_slow_query" class="input-small">
-         <option value="1" <?php echo set_selected(1,$option['monitor_slow_query']) ?> >开启</option>
-         <option value="0" <?php echo set_selected(0,$option['monitor_slow_query']) ?> >关闭</option>
+        <select name="kill_process" id="kill_process" class="input-small">
+         <option value="1" <?php echo set_selected(1,$option['kill_process']) ?> >开启</option>
+         <option value="0" <?php echo set_selected(0,$option['kill_process']) ?> >关闭</option>
         </select>
-        <span class="help-inline"></span>
+        <span class="help-inline">开启后可以在进程监控页面执行结束进程操作</span>
     </div>
    </div>
    
+   <!--
    <div class="control-group success">
     <label class="control-label" for="">*慢查询记录时间</label>
     <div class="controls">
@@ -73,6 +87,25 @@
          <option value="3600" <?php echo set_selected(3600,$option['slow_query_time']) ?>> >3600s</option>
         </select>
         <span class="help-inline">记录查询大于多少秒的SQL语句</span>
+    </div>
+   </div>
+   -->
+   
+   <div class="control-group success">
+    <label class="control-label" for="">*大表检索阀值</label>
+    <div class="controls">
+        <select name="big_table_size" id="big_table_size" class="input-small">
+         <option value="1" <?php echo set_selected(1,$option['big_table_size']) ?>> >1GB</option>
+         <option value="2" <?php echo set_selected(2,$option['big_table_size']) ?>> >2GB</option>
+         <option value="3" <?php echo set_selected(3,$option['big_table_size']) ?>> >3GB</option>
+         <option value="5" <?php echo set_selected(5,$option['big_table_size']) ?>> >5GB</option>
+         <option value="10" <?php echo set_selected(10,$option['big_table_size']) ?>> >10GB</option>
+         <option value="20" <?php echo set_selected(20,$option['big_table_size']) ?>> >20GB</option>
+         <option value="30" <?php echo set_selected(30,$option['big_table_size']) ?>> >30GB</option>
+         <option value="50" <?php echo set_selected(50,$option['big_table_size']) ?>> >50GB</option>
+         <option value="100" <?php echo set_selected(100,$option['big_table_size']) ?>> >100GB</option>
+        </select>
+        <span class="help-inline">查找数据库中大于多少GB的表</span>
     </div>
    </div>
    

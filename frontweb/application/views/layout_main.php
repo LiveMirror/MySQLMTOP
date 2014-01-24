@@ -62,10 +62,11 @@
 						</ul>
                 </li>
                 <li <?php if($cur_nav=='index_index') echo "class=active"; ?> ><a href="<?php echo site_url('index/index') ?>"> 仪表盘</a></li>
-                <li <?php if($cur_nav=='mysql_status') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/status') ?>">状态监控</a></li>
-                <li <?php if($cur_nav=='mysql_replication') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/replication') ?>">复制监控</a></li>
-                <li <?php if($cur_nav=='mysql_query') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/query') ?>">慢查询监控</a></li>
-                <li <?php if($cur_nav=='mysql_performance') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/performance') ?>">性能监控</a></li>
+                <li <?php if($cur_nav=='monitor_status') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/status') ?>">状态监控</a></li>
+                <li <?php if($cur_nav=='monitor_process') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/process') ?>">进程监控</a></li>
+                <li <?php if($cur_nav=='monitor_replication') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/replication') ?>">复制监控</a></li>
+                <li <?php if($cur_nav=='slowquery_index') echo "class=active"; ?> ><a href="<?php echo site_url('slowquery/index') ?>">慢查询分析</a></li>
+                <li <?php if($cur_nav=='mysql_performance') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/performance') ?>">性能分析</a></li>
                 <li <?php if($cur_nav=='widget_index') echo "class=active"; ?> ><a href="<?php echo site_url('widget/index') ?>">小工具</a></li>
                 <li <?php if($cur_nav=='chart_index') echo "class=active"; ?> ><a href="<?php echo site_url('chart/index') ?>">图表分析</a></li>
                 <li <?php if($cur_nav=='alarm_index') echo "class=active"; ?> ><a href="<?php echo site_url('alarm/index') ?>">告警事件</a></li>

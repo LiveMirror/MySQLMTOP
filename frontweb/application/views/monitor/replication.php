@@ -1,20 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="page-header">
-  <h2>MySQL 复制监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} ?> (每30秒采集1次数据)</small></h2>
+  <h2>MySQL 复制监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} else {echo "监控进程未启动或异常";} ?> </small></h2>
 </div>
   
-
+<div class="ui-widget">
+<div class="ui-state-highlight      ui-corner-all">
+<p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
+MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完整的master/slave结构才会显示出来; 3.检索信息后信息将不会显示出主从结构图，点击重置即可复原。</p>
+</div>
+</div>
 
 <div class="ui-state-default ui-corner-all" style="height: 45px;" >
 <p><span class="ui-icon ui-icon-search" style="float: left; margin-right: .3em;"></span>
                     
-<form name="form" class="form-inline" method="get" action="<?php site_url('mysql/replication') ?>" >
+<form name="form" class="form-inline" method="get" action="<?php site_url('monitor/replication') ?>" >
   <input type="hidden" name="search" value="submit" />
-  <select name="application" class="input-medium" style="">
+  <select name="application_id" class="input-medium" style="">
   <option value="">选择应用</option>
   <?php foreach ($application  as $item):?>
-  <option value="<?php echo $item['name'];?>" <?php if($setval['application']==$item['name']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
+  <option value="<?php echo $item['id'];?>" <?php if($setval['application_id']==$item['id']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
    <?php endforeach;?>
   </select>
   <select name="server_id" class="input-medium" style="" >
@@ -49,7 +54,7 @@
   <option value="desc" <?php if($setval['order_type']=='desc') echo "selected"; ?> >降序排序</option>
   </select>
   <button type="submit" class="btn btn-success">检索</button>
-  <a href="<?php echo site_url('mysql/replication') ?>" class="btn btn-warning">重置</a>
+  <a href="<?php echo site_url('monitor/replication') ?>" class="btn btn-warning">重置</a>
   &nbsp;
   <label class="checkbox">自动刷新
     <div class="make-switch" data-on="primary" data-off="danger" data-on-label="ON" data-text-label="">
@@ -114,7 +119,7 @@
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 12px;">
         <td><?php  echo $item['host'].':'. $item['port'] ?></td>
-         <td><?php echo check_role($item['master'],$item['slave']) ?></td>
+        <td><?php echo check_role($item['master'],$item['slave']) ?></td>
         <td><?php echo $item['read_only'] ?></td>
         <td><?php echo $item['application'] ?></td>
         <td><?php echo check_value($item['slave_io_run']) ?></td>
