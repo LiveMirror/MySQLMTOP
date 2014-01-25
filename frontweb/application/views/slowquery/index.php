@@ -110,7 +110,7 @@ $(document).ready(function(){
 		<th colspan="3"><center>Query</center></th>
         <th colspan="3"><center>Lock</center></th>
 		<th colspan="2"><center>Rows</center></th>
-		<th colspan="2"><center>Review</center></th>
+		<th colspan="3"><center>Review</center></th>
 
 	</tr>
     <tr>
@@ -125,15 +125,16 @@ $(document).ready(function(){
 		<th>time_max</th>
 		<th>sent_sum</th>
 		<th>examined_sum</th>
-        <th>status</th>
-        <th>dba</th>
+        <th>状态</th>
+        <th>标星</th>
+        <th>DBA</th>
 		
 	</tr>
 	
  <?php if(!empty($datalist)) {?>
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 12px;">
-        <td><a href="<?php echo site_url('slowquery/detail/'.$item['checksum']) ?>"  title="点击进入详情"><?php  echo $item['checksum'] ?></a></td>
+        <td><a href="<?php echo site_url('slowquery/detail/'.$item['checksum']) ?>" target="_blank"  title="点击进入详情"><?php  echo $item['checksum'] ?></a></td>
          <td>
          <div class="message_head"><span class="message_icon"><i class="icon-plus"></i></span><cite><?php echo substring($item['fingerprint'],0,40); ?>:</cite></div>
 		<div class="message_body" style="width: 300px;">
@@ -148,8 +149,9 @@ $(document).ready(function(){
         <td><?php echo $item['Lock_time_max'] ?></td>
         <td><?php echo $item['Rows_sent_sum'] ?></td>
         <td><?php echo $item['Rows_examined_sum'] ?></td>
-        <td><?php echo $item['reviewed_status'] ?></td>
-        <td><?php echo $item['reviewed_by'] ?></td>
+        <td><?php  $item['reviewed_status'] ?>未审阅</td>
+        <td><?php  $item['reviewed_status'] ?>是</td>
+        <td><?php echo $item['reviewed_by'] ?>Ruzuojun</td>
        
         
 	</tr>
