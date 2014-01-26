@@ -10,6 +10,7 @@ class Slowquery_model extends CI_Model{
         else{
             $ext='';
         }
+        
 		$this->db->select('s.*,sh.*');
         $this->db->from("mysql_slow_query_review$ext s");
         $this->db->join("mysql_slow_query_review_history$ext sh", 's.checksum=sh.checksum','left');
@@ -25,6 +26,7 @@ class Slowquery_model extends CI_Model{
         else{
             $ext='';
         }
+        
         $this->db->select('s.*,sh.*');
         $this->db->from("mysql_slow_query_review$ext s");
         $this->db->join("mysql_slow_query_review_history$ext sh", 's.checksum=sh.checksum','left');

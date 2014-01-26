@@ -67,8 +67,7 @@
                 <li <?php if($cur_nav=='monitor_process') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/process') ?>">进程监控</a></li>
                 <li <?php if($cur_nav=='monitor_replication') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/replication') ?>">复制监控</a></li>
                 <li <?php if($cur_nav=='slowquery_index') echo "class=active"; ?> ><a href="<?php echo site_url('slowquery/index') ?>">慢查询分析</a></li>
-                <li <?php if($cur_nav=='mysql_performance') echo "class=active"; ?> ><a href="<?php echo site_url('mysql/performance') ?>">性能分析</a></li>
-                <li <?php if($cur_nav=='widget_index') echo "class=active"; ?> ><a href="<?php echo site_url('widget/index') ?>">小工具</a></li>
+                <li <?php if($cur_nav=='widget') echo "class=active"; ?> ><a href="<?php echo site_url('widget/index') ?>">工具组件</a></li>
                 <li <?php if($cur_nav=='chart_index') echo "class=active"; ?> ><a href="<?php echo site_url('chart/index') ?>">图表分析</a></li>
                 <li <?php if($cur_nav=='alarm_index') echo "class=active"; ?> ><a href="<?php echo site_url('alarm/index') ?>">告警事件</a></li>
                 <li <?php if($cur_nav=='linux_index') echo "class=active"; ?> ><a href="<?php echo site_url('linux/index') ?>">系统资源</a></li>

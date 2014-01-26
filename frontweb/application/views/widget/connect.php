@@ -11,17 +11,17 @@
 </p>
 
 <div class="page-header">
-  <h4>检查占用磁盘较多的表<small> &nbsp;&nbsp;请手动执行程序./check_mysql_widget_bigtable.py启动一次检查，然后刷新该页面。</h4>
+  <h4>检查查询数据库的相关来源<small> &nbsp;&nbsp;请手动执行程序./check_mysql_widget_connect.py启动一次检查，然后刷新该页面。</h4>
 </div>
 
 
 <table class="table table-hover table-striped  table-bordered table-condensed"  >
 	<tr class="success">
-		<th><center>服务器</center></th>
-		<th ><center>数据库名</center></th>
-        <th ><center>表名</center></th>
-		<th ><center>表大小</center></th>
-		<th ><center>表注释</center></th>
+		<th ><center>来源机器</center></th>
+		<th ><center>来源用户</center></th>
+		<th ><center>连接次数</center></th>
+		<th ><center>目标主机</center></th>
+        <th ><center>目标库</center></th>
         <th ><center>检查时间</center></th>
 
 	</tr>
@@ -29,11 +29,11 @@
  <?php if(!empty($datalist)) {?>
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 12px;" >
+        <td><?php echo $item['connect_server'] ?></td>
+        <td><?php echo $item['connect_user'] ?></td>
+        <td><?php echo $item['connect_count'] ?></td>
         <td><?php  echo $item['host'].':'. $item['port'] ?></td>
-        <td><?php echo $item['db_name'] ?></td>
-        <td><?php echo $item['table_name'] ?></td>
-        <td><?php echo $item['table_size'] ?>G</td>
-        <td><?php echo $item['table_comment'] ?></td>
+        <td><?php echo $item['connect_db'] ?></td>
         <td><?php echo $item['create_time'] ?></td>
 	</tr>
  <?php endforeach;?>

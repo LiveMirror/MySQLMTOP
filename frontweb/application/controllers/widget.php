@@ -9,7 +9,7 @@ class Widget extends Front_Controller {
     
 
     public function index(){
-        $data["cur_nav"]="widget_index";
+        $data["cur_nav"]="widget";
         $this->layout->view("widget/index",$data);
     }
     
@@ -19,10 +19,37 @@ class Widget extends Front_Controller {
         if ($query->num_rows() > 0)
 		{
 			$datalist=$query->result_array();
+            $data['datalist']=$datalist;
 		}
-        $data['datalist']=$datalist;
-        $data["cur_nav"]="widget_bigtable";
+        
+        $data["cur_nav"]="widget";
         $this->layout->view("widget/bigtable",$data);
+    }
+    
+    public function hit_rate(){
+        $sql="select a.*,b.host,b.port from mysql_widget_hit_rate a,servers b where a.server_id=b.id ";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0)
+		{
+			$datalist=$query->result_array();
+            $data['datalist']=$datalist;
+		}
+        
+        $data["cur_nav"]="widget";
+        $this->layout->view("widget/hit_rate",$data);
+    }
+    
+     public function connect(){
+        $sql="select a.*,b.host,b.port from mysql_widget_connect a,servers b where a.server_id=b.id order by connect_count desc";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0)
+		{
+			$datalist=$query->result_array();
+            $data['datalist']=$datalist;
+		}
+        
+        $data["cur_nav"]="widget";
+        $this->layout->view("widget/connect",$data);
     }
     
    

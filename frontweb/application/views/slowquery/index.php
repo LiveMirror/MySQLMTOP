@@ -7,7 +7,7 @@
 <div class="ui-widget">
 <div class="ui-state-highlight      ui-corner-all">
 <p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
-MySQLMTOP温馨提示：1.默认显示第一台主机近1周的慢查询; 2.点击对应的checksum查看语句的执行详情; 3.点击展开所有按钮展开所有的语句,点击对应的+按钮可以展开当前语句。 </p>
+MySQLMTOP温馨提示：1.默认显示第一台主机近1月的慢查询; 2.点击对应的checksum查看语句的执行详情; 3.点击展开所有按钮展开所有的语句,点击对应的+按钮可以展开当前语句。 </p>
 </div>
 </div>
   
@@ -77,7 +77,9 @@ $(document).ready(function(){
   <option value="<?php echo $item['id'];?>" <?php if($setval['server_id']==$item['id']) echo "selected"; ?> ><?php echo $item['host'];?>:<?php echo $item['port'];?></option>
    <?php endforeach;?>
   </select>
- 
+  时间范围
+  <input class="Wdate" style="width:120px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  <input class="Wdate" style="width:120px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
   <button type="submit" class="btn btn-success">检索</button>
   <a href="<?php echo site_url('monitor/replication') ?>" class="btn btn-warning">重置</a>
 

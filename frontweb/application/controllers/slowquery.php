@@ -31,6 +31,11 @@ class Slowquery extends Front_Controller {
             $current_url= 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?noparam=1';
         }
         
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
+        $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
+        $this->db->where("last_seen >=", $stime);
+        $this->db->where("last_seen <=", $etime);
+        
         //分页
 		$this->load->library('pagination');
 		$config['base_url'] = $current_url;
@@ -42,9 +47,16 @@ class Slowquery extends Front_Controller {
 		$this->pagination->initialize($config);
 		$offset = !empty($_GET['per_page']) ? $_GET['per_page'] : 1;
         
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
+        $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
+        $this->db->where("last_seen >=", $stime);
+        $this->db->where("last_seen <=", $etime);
+        
         $data["datalist"]=$this->slowquery->get_total_record_slowquery($config['per_page'],($offset-1)*$config['per_page'],$server_id);
         
         $setval["server_id"]=$server_id;
+        $setval["stime"]=$stime;
+        $setval["etime"]=$etime;
         $data["setval"]=$setval;
         
         
