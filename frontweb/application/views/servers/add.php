@@ -53,6 +53,16 @@
         <span class="help-inline">属于同一节点的Master/Slave服务器请选择为相同的应用</span>
     </div>
    </div> 
+   <div class="control-group">
+    <label class="control-label" for="">慢查询分析</label>
+    <div class="controls">
+        <select name="slow_query" id="slow_query" class="input-small">
+         <option value="1"  >开启</option>
+         <option value="0" selected="selected" >关闭</option>
+        </select>
+        <span class="help-inline">该主机未配置慢查询采集脚本前请勿开启本选项，请在配置后再启用本选项。</span>
+    </div>
+   </div>
     <div class="control-group">
     <label class="control-label" for="">监控状态</label>
     <div class="controls">

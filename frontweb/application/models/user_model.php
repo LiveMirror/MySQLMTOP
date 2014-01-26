@@ -18,6 +18,14 @@ class User_model extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update($this->table, $data);
 	}
+    
+    /*
+	 * 删除信息
+	*/
+	public function delete($id){
+		$this->db->where('id', $id);
+		$this->db->delete($this->table);
+	}
 	
 	/*
 	 * 更新用户登录信息
@@ -83,6 +91,7 @@ class User_model extends CI_Model{
 			return $query->row_array();
 		}
 	}
+    
 	
 	/*
 	 * 通过用户名更新用户密码
@@ -91,7 +100,17 @@ class User_model extends CI_Model{
 		$this->db->where('username', $username);
 		$this->db->update($this->table, $data);
 	}
+    
 	
+    function get_total_user(){
+        $query = $this->db->get($this->table);
+        if ($query->num_rows() > 0)
+		{
+			$result['datalist']=$query->result_array();
+            $result['datacount']=$query->num_rows();
+            return $result;
+		}
+    }
 
 
 }

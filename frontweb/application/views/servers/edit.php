@@ -55,6 +55,16 @@
     </div>
    </div> 
     <div class="control-group">
+    <label class="control-label" for="">慢查询分析</label>
+    <div class="controls">
+        <select name="slow_query" id="slow_query" class="input-small">
+         <option value="1"  <?php echo set_selected(1,$record['slow_query']) ?>>开启</option>
+         <option value="0"  <?php echo set_selected(0,$record['slow_query']) ?> >关闭</option>
+        </select>
+        <span class="help-inline">该主机未配置慢查询采集脚本前请勿开启本选项，请在配置后再启用本选项。</span>
+    </div>
+   </div>
+    <div class="control-group">
     <label class="control-label" for="">监控状态</label>
     <div class="controls">
         <select name="status" id="status" class="input-small">

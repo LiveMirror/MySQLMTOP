@@ -71,12 +71,6 @@ $(document).ready(function(){
                     
 <form name="form" class="form-inline" method="get" action="<?php site_url('monitor/replication') ?>" >
   <input type="hidden" name="search" value="submit" />
-  <select name="application_id" class="input-medium" style="">
-  <option value="">选择应用</option>
-  <?php foreach ($application  as $item):?>
-  <option value="<?php echo $item['id'];?>" <?php if($setval['application_id']==$item['id']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
-   <?php endforeach;?>
-  </select>
   <select name="server_id" class="input-medium" style="" >
   <option value="">选择主机</option>
   <?php foreach ($server as $item):?>
@@ -110,7 +104,7 @@ $(document).ready(function(){
 		<th colspan="3"><center>Query</center></th>
         <th colspan="3"><center>Lock</center></th>
 		<th colspan="2"><center>Rows</center></th>
-		<th colspan="3"><center>Review</center></th>
+		
 
 	</tr>
     <tr>
@@ -125,10 +119,7 @@ $(document).ready(function(){
 		<th>time_max</th>
 		<th>sent_sum</th>
 		<th>examined_sum</th>
-        <th>状态</th>
-        <th>标星</th>
-        <th>DBA</th>
-		
+	
 	</tr>
 	
  <?php if(!empty($datalist)) {?>
@@ -142,16 +133,13 @@ $(document).ready(function(){
 		</div>
         <td><?php echo $item['ts_cnt'] ?></td>
         <td><?php echo $item['Query_time_sum'] ?></td>
-        <td><?php  echo $item['Query_time_min'] ?></td>
+        <td><?php echo $item['Query_time_min'] ?></td>
         <td><?php echo $item['Query_time_max'] ?></td>
         <td><?php echo $item['Lock_time_sum'] ?></td>
         <td><?php echo $item['Lock_time_min'] ?></td>
         <td><?php echo $item['Lock_time_max'] ?></td>
         <td><?php echo $item['Rows_sent_sum'] ?></td>
         <td><?php echo $item['Rows_examined_sum'] ?></td>
-        <td><?php  $item['reviewed_status'] ?>未审阅</td>
-        <td><?php  $item['reviewed_status'] ?>是</td>
-        <td><?php echo $item['reviewed_by'] ?>Ruzuojun</td>
        
         
 	</tr>

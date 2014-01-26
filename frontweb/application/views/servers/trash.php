@@ -15,7 +15,7 @@
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th colspan="3"><center>服务器</center></th>
-        <th colspan="2"><center>监控开关</center></th>
+        <th colspan="3"><center>监控开关</center></th>
 		<th colspan="4"><center>告警项目</center></th>
 		<th colspan="3"><center>告警阀值</center></th>
         <th rowspan="2"><center>管理</center></th>
@@ -26,6 +26,7 @@
         <th>应用</th>
 		<th>监控</th>
 		<th>邮件通知</th>
+        <th>慢查询</th>
         <th>总连接数</th>
 		<th>活动进程</th>
         <th>复制状态</th>
@@ -43,6 +44,7 @@
         <td><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</td>
         <td><?php echo check_on_off($item['status']) ?></td>
         <td><?php echo check_on_off($item['send_mail']) ?></td>
+        <td><?php echo check_on_off($item['slow_query']) ?></td>
         <td><?php echo check_on_off($item['alarm_connections']) ?></td>
         <td><?php echo check_on_off($item['alarm_active']) ?></td>
         <td><?php echo check_on_off($item['alarm_repl_status']) ?></td>

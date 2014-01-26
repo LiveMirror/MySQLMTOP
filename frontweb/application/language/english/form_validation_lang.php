@@ -24,8 +24,9 @@ $lang['decimal']			= "The %s field must contain a decimal number.";
 $lang['less_than']			= "The %s field must contain a number less than %s.";
 $lang['greater_than']		= "The %s field must contain a number greater than %s.";
 
-$lang['email']			= "电子邮件";
-$lang['username']			= "网站账号";
+$lang['email']			= "电子邮箱";
+$lang['username']			= "用户名";
+$lang['realname']			= "真实姓名";
 $lang['nickname']			= "昵称";
 $lang['password']			= "密码";
 $lang['password_conf']			= "重复密码";

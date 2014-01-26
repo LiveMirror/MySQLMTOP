@@ -7,10 +7,7 @@
   
 
 <table class="table  table-bordered table-condensed" style="font-size: 12px;" >
-    <tr>
-        <th style="width: 120px;">Reviewed</th>
-        <td colspan="6">Reviewed by DBA Ruzuojun at 2014-12-13 00:00:00</td>
-	</tr>
+    
     <tr>
         <th style="width: 120px;">checksum</th>
         <td colspan="2"><?php echo $record['checksum']; ?></td>
@@ -102,4 +99,3 @@
 	 
 </table>
 
-<pre>备注:</pre>

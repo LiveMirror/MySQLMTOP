@@ -57,8 +57,9 @@
                               <li <?php if($cur_nav=='application') echo "class=active"; ?> ><a href="<?php echo site_url('application/index') ?>">应用管理</a></li>
                               <li <?php if($cur_nav=='servers') echo "class=active"; ?> ><a href="<?php echo site_url('servers/index') ?>">服务器管理</a></li>
                               <!--<li <?php if($cur_nav=='datacleaning') echo "class=active"; ?> ><a href="<?php echo site_url('datacleaning/index') ?>">数据清洗</a></li>-->
-                              <li <?php if($cur_nav=='') echo "class=active"; ?> ><a href="<?php echo site_url('user/password') ?>">更改密码</a></li>
-                              <li <?php if($cur_nav=='') echo "class=active"; ?> ><a href="<?php echo site_url('user/logout') ?>">退出系统</a></li>
+                              <li <?php if($cur_nav=='user') echo "class=active"; ?> ><a href="<?php echo site_url('user/index') ?>">用户管理</a></li>
+                              <li <?php if($cur_nav=='user') echo "class=active"; ?> ><a href="<?php echo site_url('user/password') ?>">更改密码</a></li>
+                              <li <?php if($cur_nav=='user') echo "class=active"; ?> ><a href="<?php echo site_url('user/logout') ?>">退出系统</a></li>
 						</ul>
                 </li>
                 <li <?php if($cur_nav=='index_index') echo "class=active"; ?> ><a href="<?php echo site_url('index/index') ?>"> 仪表盘</a></li>
