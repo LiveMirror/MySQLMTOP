@@ -23,7 +23,7 @@
 <form class="form-horizontal" method='post' action="<?php echo site_url('user/password')?>" >
 <input type='hidden'  name='pwd' value='doing' />
    <div class="control-group">
-    <label class="control-label" for="">*网站账号</label>
+    <label class="control-label" for="">*账号</label>
     <div class="controls">
       <input type="text" id=""  name="username" value="<?php echo $username; ?>" readonly>
     </div>

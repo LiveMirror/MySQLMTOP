@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="page-header">
-  <h2>服务器回收站<small></small></h2>
+  <h2>主机回收站<small></small></h2>
 </div>
   
 
@@ -21,8 +21,8 @@
         <th rowspan="2"><center>管理</center></th>
 	</tr>
     <tr>
+        <th>主机ID</th>
         <th>主机</th>
-        <th>端口</th>
         <th>应用</th>
 		<th>监控</th>
 		<th>邮件通知</th>
@@ -39,8 +39,8 @@
  <?php if(!empty($datalist)) {?>
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 13px;">
-		<td><strong><?php echo $item['host'] ?></strong></td>
-        <td><strong><?php echo $item['port'] ?></strong></td>
+		<td><strong><?php echo $item['id'] ?></strong></td>
+		<td><strong><?php echo $item['host'] ?>:<?php echo $item['port'] ?></strong></td>
         <td><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</td>
         <td><?php echo check_on_off($item['status']) ?></td>
         <td><?php echo check_on_off($item['send_mail']) ?></td>

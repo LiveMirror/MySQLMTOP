@@ -55,7 +55,7 @@
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                               <li <?php if($cur_nav=='config') echo "class=active"; ?> ><a href="<?php echo site_url('option/index') ?>">全局配置</a></li>
                               <li <?php if($cur_nav=='application') echo "class=active"; ?> ><a href="<?php echo site_url('application/index') ?>">应用管理</a></li>
-                              <li <?php if($cur_nav=='servers') echo "class=active"; ?> ><a href="<?php echo site_url('servers/index') ?>">服务器管理</a></li>
+                              <li <?php if($cur_nav=='servers') echo "class=active"; ?> ><a href="<?php echo site_url('servers/index') ?>">主机管理</a></li>
                               <!--<li <?php if($cur_nav=='datacleaning') echo "class=active"; ?> ><a href="<?php echo site_url('datacleaning/index') ?>">数据清洗</a></li>-->
                               <li <?php if($cur_nav=='user') echo "class=active"; ?> ><a href="<?php echo site_url('user/index') ?>">用户管理</a></li>
                               <li <?php if($cur_nav=='user') echo "class=active"; ?> ><a href="<?php echo site_url('user/password') ?>">更改密码</a></li>

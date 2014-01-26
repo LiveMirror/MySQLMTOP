@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="page-header">
-  <h2>编辑服务器<small></small></h2>
+  <h2>编辑主机<small></small></h2>
 </div>
   
 

@@ -7,7 +7,7 @@
 <div class="ui-widget">
 <div class="ui-state-highlight      ui-corner-all">
 <p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
-MySQLMTOP温馨提示：1.点击对应的checksum可以查看当前语句的执行详情; 2.点击展开所有按钮可以展开所有的语句,点击对应的+按钮可以展开当前语句。 </p>
+MySQLMTOP温馨提示：1.默认显示第一台主机近1周的慢查询; 2.点击对应的checksum查看语句的执行详情; 3.点击展开所有按钮展开所有的语句,点击对应的+按钮可以展开当前语句。 </p>
 </div>
 </div>
   
@@ -71,22 +71,13 @@ $(document).ready(function(){
                     
 <form name="form" class="form-inline" method="get" action="<?php site_url('monitor/replication') ?>" >
   <input type="hidden" name="search" value="submit" />
+  选择主机
   <select name="server_id" class="input-medium" style="" >
-  <option value="">选择主机</option>
   <?php foreach ($server as $item):?>
   <option value="<?php echo $item['id'];?>" <?php if($setval['server_id']==$item['id']) echo "selected"; ?> ><?php echo $item['host'];?>:<?php echo $item['port'];?></option>
    <?php endforeach;?>
   </select>
  
-  <select name="order" class="input-small" style="width: 110px;">
-  <option value="id">排序字段</option>
-  <option value="id" <?php if($setval['order']=='id') echo "selected"; ?> >默认ID</option>
-  <option value="delay" <?php if($setval['order']=='delay') echo "selected"; ?> >延时时间</option>
-  </select>
-  <select name="order_type" class="input-small" style="width: 110px;">
-  <option value="asc" <?php if($setval['order_type']=='asc') echo "selected"; ?> >默认升序</option>
-  <option value="desc" <?php if($setval['order_type']=='desc') echo "selected"; ?> >降序排序</option>
-  </select>
   <button type="submit" class="btn btn-success">检索</button>
   <a href="<?php echo site_url('monitor/replication') ?>" class="btn btn-warning">重置</a>
 
@@ -125,7 +116,7 @@ $(document).ready(function(){
  <?php if(!empty($datalist)) {?>
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 12px;">
-        <td><a href="<?php echo site_url('slowquery/detail/'.$item['checksum']) ?>" target="_blank"  title="点击进入详情"><?php  echo $item['checksum'] ?></a></td>
+        <td><a href="<?php echo site_url('slowquery/detail/'.$item['checksum'].'/'.$setval['server_id']) ?>" target="_blank"  title="点击进入详情"><?php  echo $item['checksum'] ?></a></td>
          <td>
          <div class="message_head"><span class="message_icon"><i class="icon-plus"></i></span><cite><?php echo substring($item['fingerprint'],0,40); ?>:</cite></div>
 		<div class="message_body" style="width: 300px;">
@@ -154,4 +145,8 @@ $(document).ready(function(){
 	 
 </table>
 
-
+<div class="pagination">
+  <ul>
+	<?php echo $this->pagination->create_links(); ?>
+  </ul>
+</div>
