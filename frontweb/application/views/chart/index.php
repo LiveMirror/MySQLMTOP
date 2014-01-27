@@ -33,19 +33,21 @@
 </div>
 
 
-<table class="table table-hover table-striped  table-bordered table-condensed"  >
+<table class="table  table-striped  table-bordered table-condensed"  >
 	<tr class="info">
         <th><center>总连接数</center></th>
         <th><center>活动进程</center></th>
-        <th><center>QPS/TPS</center></th>
+        <th><center>QPS</center></th>
+        <th><center>TPS</center></th>
 	</tr>
 	
  <?php if(!empty($server)) {?>
  <?php foreach ($server  as $item):?>
     <tr style="font-size: 13px;" class="">
-       <td><img src="<?php  echo site_url('grapha/active/small/'.$item["id"].'/900'); ?>"></td>
-       <td><img src="<?php  echo site_url('grapha/connections/small/'.$item["id"].'/900'); ?>"></td>
-       <td><img src="<?php  echo site_url('grapha/qpstps/small/'.$item["id"].'/900'); ?>"></td>
+       <td><canvas id="connection" height="300" width="300"></canvas></td>
+       <td><canvas id="active" height="200" width="300"></canvas></td>
+       <td><canvas id="qps" height="200" width="300"></canvas></td>
+       <td><canvas id="tps" height="200" width="300"></canvas></td>
 	</tr>
  <?php endforeach;?>
 <?php }else{  ?>
@@ -56,7 +58,6 @@
 </tr>
 <?php } ?>	 
 </table>
-
 
 
 

@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
+<script src="./bootstrap/js/bootstrap-switch.js"></script>
+<link href="./bootstrap/css/bootstrap-switch.css" rel="stylesheet"/>
+
 <div class="page-header">
   <h2>MySQL 复制监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} else {echo "监控进程未启动或异常";} ?> </small></h2>
 </div>
@@ -138,7 +142,7 @@ MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完
 <?php }else{  ?>
 <tr>
 <td colspan="12">
-<font color="red">对不起，没有查询到相关数据！</font>
+<font color="red">对不起,没有查询到相关数据！ 1.请确认是否添加主机信息; 2.请确认是否启动监控进程或执行检测程序。</font>
 </td>
 </tr>
 <?php } ?>

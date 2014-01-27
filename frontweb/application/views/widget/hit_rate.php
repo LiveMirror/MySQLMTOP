@@ -11,7 +11,7 @@
 </p>
 
 <div class="page-header">
-  <h4>检查数据库的相关命中率<small> &nbsp;&nbsp;请手动执行程序./check_mysql_widget_hit_rate.py启动一次检查，然后刷新该页面。</h4>
+  <h4>检查数据库的性能相关命中率<small> &nbsp;&nbsp;请手动执行程序./check_mysql_widget_hit_rate.py启动一次检查，然后刷新该页面。</h4>
 </div>
 
 
@@ -44,7 +44,7 @@
 <?php }else{  ?>
 <tr>
 <td colspan="12">
-<font color="red">对不起，没有查询到相关数据！</font>
+<font color="red">对不起,没有查询到相关数据！ 1.请确认是否添加主机信息; 2.请确认是否启动监控进程或执行检测程序。</font>
 </td>
 </tr>
 <?php } ?>

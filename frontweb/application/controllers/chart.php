@@ -4,7 +4,7 @@ class Chart extends Front_Controller {
 
     function __construct(){
 		parent::__construct();
-		$this->load->model("mysql_model","mysql");
+		$this->load->model("monitor_model","monitor");
         $this->load->model('application_model','app');
         $this->load->model('servers_model','server');
         

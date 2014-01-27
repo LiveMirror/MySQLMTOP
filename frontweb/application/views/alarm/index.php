@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
+<script src="./bootstrap/js/bootstrap-switch.js"></script>
+<link href="./bootstrap/css/bootstrap-switch.css" rel="stylesheet"/>
+<script language="javascript" src="js/DatePicker/WdatePicker.js"></script>
 
 <div class="page-header">
   <h2>报警事件记录平台<small></small></h2>
@@ -92,7 +96,7 @@
 <?php }else{  ?>
 <tr>
 <td colspan="12">
-<font color="red">对不起，没有查询到相关数据！</font>
+<font color="red">当前没有任何报警信息！</font>
 </td>
 </tr>
 <?php } ?>	 

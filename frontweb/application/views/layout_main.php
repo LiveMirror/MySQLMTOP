@@ -13,7 +13,6 @@
 <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="./bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href="./bootstrap/css/jquery-ui-1.10.0.custom.css" rel="stylesheet" />
-<link href="./bootstrap/css/bootstrap-switch.css" rel="stylesheet"/>
 <link href="./bootstrap/css/font-awesome.min.css"  rel="stylesheet">
 <link href="./bootstrap/css/prettify.css"  rel="stylesheet">
 <!--[if lt IE 9]>
@@ -24,6 +23,7 @@
 <![endif]-->
             
 <link rel="stylesheet" href="css/admin.css" />
+
 
 </head>
 
@@ -91,14 +91,13 @@
     </footer>
 </div>
 
-<script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
+
 <script src="./bootstrap/js/bootstrap.min.js"></script>
-<script src="./bootstrap/js/bootstrap-switch.js"></script>
 <script src="./bootstrap/js/jquery-ui-1.10.0.custom.min.js"></script>
 <script src="./bootstrap/js/prettify.js"></script>
 <script language="javascript" src="js/admin.js"></script>
-<script language="javascript" src="js/DatePicker/WdatePicker.js"></script>
-  
 
+  
+ 
   </body>
 </html>

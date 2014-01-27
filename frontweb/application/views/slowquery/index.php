@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<script language="javascript" src="js/DatePicker/WdatePicker.js"></script>
+
 <div class="page-header">
   <h2>MySQL 慢查询分析平台<small> </small></h2>
 </div>
@@ -7,7 +9,7 @@
 <div class="ui-widget">
 <div class="ui-state-highlight      ui-corner-all">
 <p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
-MySQLMTOP温馨提示：1.默认显示第一台主机近1月的慢查询; 2.点击对应的checksum查看语句的执行详情; 3.点击展开所有按钮展开所有的语句,点击对应的+按钮可以展开当前语句。 </p>
+MySQLMTOP温馨提示：1.默认显示一台主机的慢查询,可通过检索栏切换到不同的主机; 2.点击对应的checksum查看语句的执行详情; 3.点击展开所有按钮展开所有的语句,+按钮可以展开当前语句。 </p>
 </div>
 </div>
   
@@ -71,13 +73,13 @@ $(document).ready(function(){
                     
 <form name="form" class="form-inline" method="get" action="<?php site_url('monitor/replication') ?>" >
   <input type="hidden" name="search" value="submit" />
-  选择主机
+  切换主机(已开启慢查询)
   <select name="server_id" class="input-medium" style="" >
   <?php foreach ($server as $item):?>
   <option value="<?php echo $item['id'];?>" <?php if($setval['server_id']==$item['id']) echo "selected"; ?> ><?php echo $item['host'];?>:<?php echo $item['port'];?></option>
    <?php endforeach;?>
   </select>
-  时间范围
+  最后执行时间
   <input class="Wdate" style="width:120px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
   <input class="Wdate" style="width:120px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
   <button type="submit" class="btn btn-success">检索</button>
@@ -93,7 +95,7 @@ $(document).ready(function(){
 
 <table class="table table-hover table-striped  table-bordered table-condensed" style="font-size: 12px;" >
 	<tr>
-		<th colspan="3"><center>SQL</center></th>
+		<th colspan="4"><center>SQL</center></th>
 		<th colspan="3"><center>Query</center></th>
         <th colspan="3"><center>Lock</center></th>
 		<th colspan="2"><center>Rows</center></th>
@@ -104,6 +106,7 @@ $(document).ready(function(){
         <th>checksum</th>
         <th>fringerprint <span class="collapse_buttons" ><a href="#" class="show_all_message">展开所有</a> <a href="#" class="collpase_all_message">合并所有</a></span></th>
         <th>ts_cnt</th>
+        <th>last_seen</th>
         <th>time_sum</th>
 		<th>time_min</th>
         <th>time_max</th>
@@ -125,6 +128,7 @@ $(document).ready(function(){
 			<pre><span style="color: blue;"><?php echo $item['fingerprint']; ?></span></pre>
 		</div>
         <td><?php echo $item['ts_cnt'] ?></td>
+        <td><?php echo $item['last_seen'] ?></td>
         <td><?php echo $item['Query_time_sum'] ?></td>
         <td><?php echo $item['Query_time_min'] ?></td>
         <td><?php echo $item['Query_time_max'] ?></td>
@@ -140,7 +144,7 @@ $(document).ready(function(){
 <?php }else{  ?>
 <tr>
 <td colspan="12">
-<font color="red">对不起，没有查询到相关数据！</font>
+<font color="red">对不起,没有查询到相关数据！ 1.请确认是否添加主机信息; 2.请确认主机是否部署慢查询采集脚本并开启慢查询。</font>
 </td>
 </tr>
 <?php } ?>

@@ -30,6 +30,7 @@ class Slowquery_model extends CI_Model{
         $this->db->select('s.*,sh.*');
         $this->db->from("mysql_slow_query_review$ext s");
         $this->db->join("mysql_slow_query_review_history$ext sh", 's.checksum=sh.checksum','left');
+        $this->db->order_by('s.last_seen','desc');
         $this->db->limit($limit,$offset);
         
         $query = $this->db->get();

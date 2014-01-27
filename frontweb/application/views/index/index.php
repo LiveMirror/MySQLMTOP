@@ -2,8 +2,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
 <div class="page-header">
-  <h2>健康状态面板<small></small></h2>
+  <h2>MySQL仪表盘<small></small></h2>
 </div>
+
+<table class="table  table-striped  table-bordered table-condensed"  >
+	<tr class="info">
+        <th><center>连接状态</center></th>
+        <th><center>复制状态</center></th>
+        <th><center>版本分布</center></th>
+        
+	</tr>
+    <tr style="font-size: 13px;" class="">
+       <td><div id="mysql_status" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
+       <td><div id="mysql_replication" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
+       <td><div id="mysql_version" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
+	</tr> 
+</table>
 
             
 <div class="row">
@@ -170,5 +184,75 @@
 
 </div>
 
+  <script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="./js/jqplot/jquery.jqplot.min.js"></script>
+  <script type="text/javascript" src="./js/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+  <script type="text/javascript" src="./js/jqplot/plugins/jqplot.donutRenderer.min.js"></script>
+  <link href="./js/jqplot/jquery.jqplot.min.css"  rel="stylesheet">
   
+
+<script>
+
+$(document).ready(function(){
+  var data = [
+    ['MySQL 5.0', 12],['MySQL 5.1', 9], ['MySQL 5.5', 14],['MySQL 5.6', 16]
+  ];
+  var plot1 = jQuery.jqplot ('mysql_version', [data], 
+    { 
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+      }, 
+      legend: { show:true, location: 'e' }
+    }
+  );
+});
+
+$(document).ready(function(){
+  var data = [
+    ['连接正常主机', 65],['连接异常主机', 2]
+  ];
+  var plot1 = jQuery.jqplot ('mysql_status', [data], 
+    { 
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+      }, 
+      legend: { show:true, location: 'e' }
+    }
+  );
+});
+
+$(document).ready(function(){
+  var data = [
+    ['复制正常主机', 2],['复制异常主机', 0]
+  ];
+  var plot1 = jQuery.jqplot ('mysql_replication', [data], 
+    { 
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+      }, 
+      legend: { show:true, location: 'e' }
+    }
+  );
+});
+	
+</script>
+	
 

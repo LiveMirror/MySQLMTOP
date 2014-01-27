@@ -31,7 +31,7 @@ class Slowquery extends Front_Controller {
             $current_url= 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?noparam=1';
         }
         
-        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*365);
         $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
         $this->db->where("last_seen >=", $stime);
         $this->db->where("last_seen <=", $etime);
@@ -47,7 +47,7 @@ class Slowquery extends Front_Controller {
 		$this->pagination->initialize($config);
 		$offset = !empty($_GET['per_page']) ? $_GET['per_page'] : 1;
         
-        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*30);
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*365);
         $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
         $this->db->where("last_seen >=", $stime);
         $this->db->where("last_seen <=", $etime);
