@@ -87,7 +87,7 @@
 <div class="container-fluid">
     <hr>
     <footer>
-        <p>&copy; MySQL MTOP 2013  <a href="http://www.mtop.cc" target="_blank">www.mtop.cc</a> 版权所有</p>
+        <p>&copy; MySQLMTOP V2.0 2013 <a href="http://www.mtop.cc" target="_blank">www.mtop.cc</a> 版权所有     <a href="http://www.mtop.cc/manual" target="_blank">在线手册</a> <a href="http://www.mtop.cc/forum" target="_blank">交流社区</a></p>
     </footer>
 </div>
 
