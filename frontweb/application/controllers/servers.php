@@ -3,6 +3,10 @@
 class Servers extends Front_Controller {
     function __construct(){
 		parent::__construct();
+        
+        if($this->session->userdata('username')!='admin') {
+            redirect(site_url());  
+        }
         $this->load->model('servers_model','servers');
         $this->load->model('application_model','app');
 		$this->load->library('form_validation');
@@ -13,10 +17,24 @@ class Servers extends Front_Controller {
      * 首页
      */
     public function index(){
-        $sql="select servers.*,application.display_name,application.name from servers  join application on servers.application_id=application.id and servers.is_delete=0";
+        $ext_where='';
+        $application_id=isset($_GET["application_id"]) ? $_GET["application_id"] : "";
+        $host=isset($_GET["host"]) ? $_GET["host"] : "";
+        if(!empty($application_id)){
+            $ext_where=" and servers.application_id=$application_id ";
+        } 
+        if(!empty($host)){
+            $ext_where=$ext_where."  and servers.host like '%$host%' ";
+        }
+
+        $sql="select servers.*,application.display_name,application.name from servers  join application on servers.application_id=application.id and servers.is_delete=0 $ext_where";
         $result=$this->servers->get_total_record_sql($sql);
         $data["datalist"]=$result['datalist'];
         $data["datacount"]=$result['datacount'];
+        $data["application"]=$this->app->get_total_record_usage();
+        $setval["application_id"]=$application_id;
+        $setval["host"]=$host;
+        $data["setval"]=$setval;
         $data["cur_nav"]="servers_index";
         $this->layout->view("servers/index",$data);
     }

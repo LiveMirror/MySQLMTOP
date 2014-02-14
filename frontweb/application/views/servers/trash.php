@@ -4,14 +4,16 @@
   <h2>主机回收站<small></small></h2>
 </div>
   
-
-<div class="btn-group">
-  <a  href="<?php echo site_url('servers/add') ?>"  class="btn "><i class="icon-pencil"></i>新增</a>
-  <a  href="<?php echo site_url('servers/batch_add') ?>"  class="btn "><i class="icon-pencil"></i>批量新增</a>
-  <a  href="<?php echo site_url('servers/index') ?>"  class="btn "><i class="icon-list"></i>列表</a>
-  <a  href="<?php echo site_url('servers/trash') ?>"  class="btn "><i class="icon-trash"></i>回收站</a>
-</div>
-<hr />               
+<div class="btn-toolbar">
+                <div class="btn-group">
+                  <a class="btn btn-default " href="<?php echo site_url('servers/add') ?>"><i class="fui-new-16"></i>&nbsp;新增</a>
+                  <a class="btn btn-default " href="<?php echo site_url('servers/batch_add') ?>"><i class="fui-new-16"></i>&nbsp;批量新增</a>
+                  <a class="btn btn-default " href="<?php echo site_url('servers/index') ?>"><i class="fui-menu-16"></i>&nbsp;列表</a>
+                  <a class="btn btn-default active" href="<?php echo site_url('servers/trash') ?>"><i class="fui-calendar-16"></i>&nbsp;回收站</a>
+                </div>
+</div> <!-- /toolbar -->               
+<hr/>
+             
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th colspan="3"><center>服务器</center></th>

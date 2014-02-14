@@ -37,6 +37,14 @@ class Linux_model extends CI_Model{
            return $query->result_array(); 
         }
     }
+    
+    function get_linux_info($host,$time){
+        $query=$this->db->query("select * from linux_resource_history where ip='$host' and DATE_FORMAT(create_time,'%Y-%m-%d %H:%i')='$time' limit 1; ");
+        if ($query->num_rows() > 0)
+        {
+           return $query->row_array(); 
+        }
+    }
 
 
 }

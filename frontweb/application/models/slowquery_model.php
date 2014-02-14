@@ -30,7 +30,7 @@ class Slowquery_model extends CI_Model{
         $this->db->select('s.*,sh.*');
         $this->db->from("mysql_slow_query_review$ext s");
         $this->db->join("mysql_slow_query_review_history$ext sh", 's.checksum=sh.checksum','left');
-        $this->db->order_by('s.last_seen','desc');
+        
         $this->db->limit($limit,$offset);
         
         $query = $this->db->get();
@@ -59,6 +59,20 @@ class Slowquery_model extends CI_Model{
 			return $query->row_array();
 		}
 	}
+    
+    function get_analyze_day($server_id){
+        if($server_id && $server_id!=0){
+            $ext = '_'.$server_id;
+        }
+        else{
+            $ext='';
+        }
+        $query=$this->db->query("select * from (select DATE_FORMAT(last_seen,'%Y-%m-%d') as days,count(*) as count from mysql_slow_query_review$ext  group by days order by days desc limit 10) as total order by days asc ;");
+        if ($query->num_rows() > 0)
+        {
+           return $query->result_array(); 
+        }
+    }
 	
 
 

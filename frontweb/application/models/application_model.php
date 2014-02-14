@@ -9,6 +9,7 @@ class Application_model extends CI_Model{
 	}
     
     function get_total_record(){
+        $this->db->order_by('name','asc');
         $query = $this->db->get($this->table);
 		if ($query->num_rows() > 0)
 		{
@@ -25,6 +26,7 @@ class Application_model extends CI_Model{
 	}
     
     function get_total_record_usage(){
+        $this->db->order_by('name','asc');
         $this->db->where('is_delete',0);
         $query = $this->db->get($this->table);
 		if ($query->num_rows() > 0)

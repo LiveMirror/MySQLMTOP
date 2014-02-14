@@ -30,8 +30,8 @@
   <option value="warning" <?php if($setval['level']=='warning') echo "selected"; ?> >警告</option>
   <option value="error" <?php if($setval['level']=='error') echo "selected"; ?> >紧急</option>
   </select>
-   <input class="Wdate" style="width:120px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
-  <input class="Wdate" style="width:120px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+   <input class="Wdate" style="width:150px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  <input class="Wdate" style="width:150px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
 
   <button type="submit" class="btn btn-success">检索</button>
   <a href="<?php echo site_url('alarm/index') ?>" class="btn btn-warning">重置</a>

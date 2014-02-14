@@ -31,7 +31,7 @@ class Slowquery extends Front_Controller {
             $current_url= 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'?noparam=1';
         }
         
-        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*365);
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*7);
         $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
         $this->db->where("last_seen >=", $stime);
         $this->db->where("last_seen <=", $etime);
@@ -47,18 +47,53 @@ class Slowquery extends Front_Controller {
 		$this->pagination->initialize($config);
 		$offset = !empty($_GET['per_page']) ? $_GET['per_page'] : 1;
         
-        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*365);
+        
+        $stime = !empty($_GET["stime"])? $_GET["stime"]: date('Y-m-d H:i',time()-3600*24*7);
         $etime = !empty($_GET["etime"])? $_GET["etime"]: date('Y-m-d H:i',time());
         $this->db->where("last_seen >=", $stime);
         $this->db->where("last_seen <=", $etime);
+        $setval["stime"]=$stime;
+        $setval["etime"]=$etime;
+        
+        
+        $order = !empty($_GET["order"])? $_GET["order"]: 'last_seen';
+        $order_type = !empty($_GET["order_type"])? $_GET["order_type"]: 'desc';
+        $this->db->order_by($order,$order_type);
+        $setval["order"]=$order;
+        $setval["order_type"]=$order_type;
         
         $data["datalist"]=$this->slowquery->get_total_record_slowquery($config['per_page'],($offset-1)*$config['per_page'],$server_id);
         
+        //慢查询图表
+        if($server_id && $server_id!=0){
+            $ext = '_'.$server_id;
+        }
+        else{
+            $ext='';
+        }
+        //日图表
+        $reslut_day=array();
+        for($i=15;$i>=0;$i--){
+            $time=time()-3600*24*$i;
+            $reslut_day[$i]['day']=$date= date('Y-m-d',$time);
+            $reslut_day[$i]['num'] = $this->db->query("select count(*) as num from mysql_slow_query_review$ext where DATE_FORMAT(last_seen,'%Y-%m-%d')='$date' ")->row()->num;;
+        }
+        $data['analyze_day']=$reslut_day;
+        //月图表
+        $reslut_month=array();
+        for($i=12;$i>=0;$i--){
+            $time=time()-3600*24*$i*31;
+            $reslut_month[$i]['month']=$date= date('Y-m',$time);
+            $reslut_month[$i]['num'] = $this->db->query("select count(*) as num from mysql_slow_query_review$ext where DATE_FORMAT(last_seen,'%Y-%m')='$date' ")->row()->num;;
+        }
+        $data['analyze_month']=$reslut_month;
+        //print_r($reslut_month);exit;
+
         $setval["server_id"]=$server_id;
-        $setval["stime"]=$stime;
-        $setval["etime"]=$etime;
-        $data["setval"]=$setval;
         
+
+        $data["setval"]=$setval;
+        $data["cur_servers"] = $this->server->get_servers($server_id);
         
         $data["cur_nav"]="slowquery_index";
         $this->layout->view("slowquery/index",$data);

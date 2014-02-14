@@ -139,7 +139,7 @@ MySQLMTOP温馨提示：1.监控频率请在系统管理里面进行配置; 2.�
         <td><?php echo check_value($item['TPS']) ?></td>
         <td><?php echo check_value($item['Bytes_received']) ?>KB</td>
         <td><?php echo check_value($item['Bytes_sent']) ?>KB</td>
-        <td><a href="<?php echo site_url('chart/detail/'.$item['server_id']) ?>">图表</a></td>
+        <td><a href="<?php echo site_url('chart/index/'.$item['server_id']) ?>">图表</a></td>
 	</tr>
  <?php endforeach;?>
 

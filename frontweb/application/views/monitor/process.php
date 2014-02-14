@@ -5,7 +5,7 @@
 <link href="./bootstrap/css/bootstrap-switch.css" rel="stylesheet"/>
 
 <div class="page-header">
-  <h2>MySQL 进程监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} ?> (每5秒更新一次数据)</small></h2>
+  <h2>MySQL 进程监控平台<small> &nbsp;&nbsp;最新检测时间：<?php if(!empty($datalist)){ echo $datalist[0]['create_time'];} ?> </small></h2>
 </div>
 
 <div class="ui-widget">
@@ -153,18 +153,22 @@ $(document).ready(function(){
         <td><?php echo $item['host'] ?>:<?php echo $item['port'] ?></td>
         <td>
         <?php if($option_kill_process==1){ ?>
-        <div class="<?php echo $item['pid'] ?>"><a href="javascript::(0)" ondblclick="kill_process(<?php echo $item['server_id'] ?>,<?php echo $item['pid'] ?>)" class="btn-danger btn-mini  btn">结束进程</a></div>
+            <?php  if(($this->session->userdata('logged_in')==1) and ($this->session->userdata('username')=='admin')) {?>
+            <div class="<?php echo $item['pid'] ?>"><a href="javascript::(0)" ondblclick="kill_process(<?php echo $item['server_id'] ?>,<?php echo $item['pid'] ?>)" class="btn-danger btn-mini  btn">结束进程</a></div>
+            <?php }else{ ?>
+            <button class='btn btn-mini btn-info disabled' type='button'>无权限</button>
+            <?php } ?>
         <?php }else{ ?>
         <button class='btn btn-mini btn-info disabled' type='button'>未开启</button>
-        </td>
         <?php } ?>
+        </td>
 	</tr>
 
  <?php endforeach;?>
 <?php }else{  ?>
 <tr>
 <td colspan="12">
-<font color="red">对不起,没有查询到相关数据！ 1.请确认是否添加主机信息; 2.请确认是否启动监控进程或执行检测程序。</font>
+<font color="red">没有查询到相关数据！</font>
 </td>
 </tr>
 <?php } ?>	 

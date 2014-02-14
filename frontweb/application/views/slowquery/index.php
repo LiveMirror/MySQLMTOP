@@ -6,6 +6,18 @@
   <h2>MySQL 慢查询分析平台<small> </small></h2>
 </div>
 
+
+<table class="table  table-striped  table-bordered table-condensed"  >
+	<tr class="info">
+        <th><center>慢查询趋势图(天)</center></th>
+        <th><center>慢查询趋势图(月)</center></th>
+	</tr>
+    <tr style="font-size: 12px;" class="">
+       <td><div id="chart1" style="margin-top:5px; margin-left:0px; width:600px; height:240px;"></div></td>
+       <td><div id="chart2" style="margin-top:5px; margin-left:0px; width:600px; height:240px;"></div></td>
+	</tr>  
+</table>
+
 <div class="ui-widget">
 <div class="ui-state-highlight      ui-corner-all">
 <p><span class="ui-icon ui-icon-volume-on" style="float: left; margin-right: .3em;"></span>
@@ -65,6 +77,9 @@ $(document).ready(function(){
 	font-style: normal;
 }
 
+
+
+
 </style>
 
 
@@ -80,8 +95,23 @@ $(document).ready(function(){
    <?php endforeach;?>
   </select>
   最后执行时间
-  <input class="Wdate" style="width:120px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
-  <input class="Wdate" style="width:120px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  <input class="Wdate" style="width:150px;" type="text" name="stime" id="start_time>" value="<?php echo $setval['stime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  <input class="Wdate" style="width:150px;" type="text" name="etime" id="end_time>" value="<?php echo $setval['etime'] ?>" onFocus="WdatePicker({doubleCalendar:false,isShowClear:false,readOnly:false,startDate:'1980-05-01',dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  
+  排序
+  <select name="order" class="input-small" style="width: 110px;">
+  <option value="last_seen" <?php if($setval['order']=='last_seen') echo "selected"; ?> >last_seen</option>
+  <option value="ts_cnt" <?php if($setval['order']=='ts_cnt') echo "selected"; ?> >ts_cnt</option>
+  <option value="query_time_sum" <?php if($setval['order']=='query_time_sum') echo "selected"; ?> >query_time_sum</option>
+  <option value="query_time_min" <?php if($setval['order']=='query_time_min') echo "selected"; ?> >query_time_min</option>
+  <option value="query_time_max" <?php if($setval['order']=='query_time_max') echo "selected"; ?> >query_time_max</option>
+
+  </select>
+  <select name="order_type" class="input-small" style="width: 110px;">
+  <option value="desc" <?php if($setval['order_type']=='desc') echo "selected"; ?> >降序</option>
+  <option value="asc" <?php if($setval['order_type']=='asc') echo "selected"; ?> >升序</option>
+  </select>
+  
   <button type="submit" class="btn btn-success">检索</button>
   <a href="<?php echo site_url('monitor/replication') ?>" class="btn btn-warning">重置</a>
 
@@ -90,7 +120,6 @@ $(document).ready(function(){
 </div>
 
                 
-
 
 
 <table class="table table-hover table-striped  table-bordered table-condensed" style="font-size: 12px;" >
@@ -105,8 +134,8 @@ $(document).ready(function(){
     <tr>
         <th>checksum</th>
         <th>fringerprint <span class="collapse_buttons" ><a href="#" class="show_all_message">展开所有</a> <a href="#" class="collpase_all_message">合并所有</a></span></th>
-        <th>ts_cnt</th>
         <th>last_seen</th>
+        <th>ts_cnt</th>
         <th>time_sum</th>
 		<th>time_min</th>
         <th>time_max</th>
@@ -127,8 +156,9 @@ $(document).ready(function(){
 		<div class="message_body" style="width: 300px;">
 			<pre><span style="color: blue;"><?php echo $item['fingerprint']; ?></span></pre>
 		</div>
-        <td><?php echo $item['ts_cnt'] ?></td>
+        
         <td><?php echo $item['last_seen'] ?></td>
+        <td><?php echo $item['ts_cnt'] ?></td>
         <td><?php echo $item['Query_time_sum'] ?></td>
         <td><?php echo $item['Query_time_min'] ?></td>
         <td><?php echo $item['Query_time_max'] ?></td>
@@ -156,3 +186,111 @@ $(document).ready(function(){
 	<?php echo $this->pagination->create_links(); ?>
   </ul>
 </div>
+
+
+<script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/plugins/jqplot.highlighter.min.js"></script>
+<script type="text/javascript" src="./js/jqplot/plugins/jqplot.cursor.min.js"></script>
+<link href="./js/jqplot/jquery.jqplot.min.css"  rel="stylesheet">
+
+<script>
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($analyze_day)) { foreach($analyze_day as $item){ ?>
+    ["<?php echo $item['day']?>", <?php echo $item['num']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('chart1', [data1], {
+    
+     title:{
+         text:"当前主机:<?php echo $cur_servers; ?>",
+         show:true,
+         fontSize:'10px',
+         textColor:'#666',
+    },
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:'%m-%d'},
+            //min:'2014-02-03',
+            tickInterval:'1 days',
+            label: "日期",
+            
+        },
+        yaxis: {
+          label: "慢查询数"
+        }
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: '',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{lineWidth:2, markerOptions:{style:'filledSquare'}}]
+  });
+});
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($analyze_month)) { foreach($analyze_month as $item){ ?>
+    ["<?php echo $item['month']?>", <?php echo $item['num']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('chart2', [data1], {
+    title:{
+         text:"当前主机:<?php echo $cur_servers; ?>",
+         show:true,
+         fontSize:'10px',
+         textColor:'#666',
+    },
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:'%y-%m'},
+            //min:'2013-07',
+            tickInterval:'1 month',
+            label: "月份",
+        },
+        yaxis: {
+          label: "慢查询数"
+        }
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: 'x,y',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{lineWidth:2, markerOptions:{style:'filledCircle'}}]
+  });
+});
+
+</script>

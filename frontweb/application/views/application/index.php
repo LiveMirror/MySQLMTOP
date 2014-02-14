@@ -12,13 +12,15 @@
                   </div>
                 </div>
 -->
-
-<div class="btn-group">
-  <a  href="<?php echo site_url('application/add') ?>"  class="btn "><i class="icon-pencil"></i>新增</a>
-  <a  href="<?php echo site_url('application/index') ?>"  class="btn "><i class="icon-list"></i>列表</a>
-  <a  href="<?php echo site_url('application/trash') ?>"  class="btn "><i class="icon-trash"></i>回收站</a>
-</div>
-<hr />                
+<div class="btn-toolbar">
+                <div class="btn-group">
+                  <a class="btn btn-default " href="<?php echo site_url('application/add') ?>"><i class="fui-new-16"></i>&nbsp;新增</a>
+                  <a class="btn btn-default active" href="<?php echo site_url('application/index') ?>"><i class="fui-menu-16"></i>&nbsp;列表</a>
+                  <a class="btn btn-default " href="<?php echo site_url('application/trash') ?>"><i class="fui-calendar-16"></i>&nbsp;回收站</a>
+                </div>
+</div> <!-- /toolbar -->
+<hr/>
+          
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th>应用名称</th>

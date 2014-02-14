@@ -3,6 +3,9 @@
 class Option extends Front_Controller {
     function __construct(){
 		parent::__construct();
+        if($this->session->userdata('username')!='admin') {
+            redirect(site_url());  
+        }
         $this->load->model("option_model","option");
 		$this->load->library('form_validation');
 	

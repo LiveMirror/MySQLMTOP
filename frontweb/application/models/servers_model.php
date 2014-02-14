@@ -65,6 +65,15 @@ class Servers_model extends CI_Model{
 		}
 	}
     
+    function get_servers($server_id){
+        $query = $this->db->get_where($this->table, array('id' =>$server_id));
+		if ($query->num_rows() > 0)
+		{
+			$data=$query->row_array();
+            return $data['host'].":".$data['port'];
+		}
+    }
+    
     /*
     * 插入数据
     */

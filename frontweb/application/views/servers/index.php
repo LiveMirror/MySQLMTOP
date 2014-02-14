@@ -4,13 +4,36 @@
   <h2>主机管理<small></small></h2>
 </div>
   
-<div class="btn-group">
-  <a  href="<?php echo site_url('servers/add') ?>"  class="btn "><i class="icon-pencil"></i>新增</a>
-  <a  href="<?php echo site_url('servers/batch_add') ?>"  class="btn "><i class="icon-pencil"></i>批量新增</a>
-  <a  href="<?php echo site_url('servers/index') ?>"  class="btn "><i class="icon-list"></i>列表</a>
-  <a  href="<?php echo site_url('servers/trash') ?>"  class="btn "><i class="icon-trash"></i>回收站</a>
+ 
+<div class="btn-toolbar">
+                <div class="btn-group">
+                  <a class="btn btn-default " href="<?php echo site_url('servers/add') ?>"><i class="fui-new-16"></i>&nbsp;新增</a>
+                  <a class="btn btn-default " href="<?php echo site_url('servers/batch_add') ?>"><i class="fui-new-16"></i>&nbsp;批量新增</a>
+                  <a class="btn btn-default active" href="<?php echo site_url('servers/index') ?>"><i class="fui-menu-16"></i>&nbsp;列表</a>
+                  <a class="btn btn-default " href="<?php echo site_url('servers/trash') ?>"><i class="fui-calendar-16"></i>&nbsp;回收站</a>
+                </div>
+</div> <!-- /toolbar -->               
+<hr/>
+
+<div class="ui-state-default ui-corner-all" style="height: 45px;" >
+<p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-search"></span>                 
+<form name="form" class="form-inline" method="get" action="<?php site_url('server/index') ?>" >
+ <select name="application_id" class="input-medium" style="">
+  <option value="">选择应用</option>
+  <?php foreach ($application  as $item):?>
+  <option value="<?php echo $item['id'];?>" placeholder="IP地址" <?php if($setval['application_id']==$item['id']) echo "selected"; ?> ><?php echo $item['display_name'] ?>(<?php echo $item['name'] ?>)</option>
+   <?php endforeach;?>
+  </select>
+  主机IP <input class="" style="width:150px;" type="text" name="host" id="host" value="<?php echo $setval['host']; ?>"  />
+  
+  <button type="submit" class="btn btn-success">检索</button>
+  <a href="<?php echo site_url('server/index') ?>" class="btn btn-warning">重置</a>
+
+
+</form>
+                    
 </div>
-<hr /> 
+
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th colspan="3"><center>服务器</center></th>

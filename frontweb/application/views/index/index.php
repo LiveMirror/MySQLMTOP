@@ -1,23 +1,22 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="page-header">
-  <h2>MySQL仪表盘<small></small></h2>
-</div>
+
 
 <table class="table  table-striped  table-bordered table-condensed"  >
 	<tr class="info">
-        <th><center>连接状态</center></th>
-        <th><center>复制状态</center></th>
-        <th><center>版本分布</center></th>
-        
+        <th><center>数据库版本分布</center></th>
+        <th><center>数据库连接状态</center></th>
+        <th><center>数据库复制状态</center></th>
 	</tr>
     <tr style="font-size: 13px;" class="">
+       <td><div id="mysql_version" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
        <td><div id="mysql_status" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
        <td><div id="mysql_replication" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
-       <td><div id="mysql_version" style="margin-top:5px; margin-left:0px; width:420px; height:300px;"></div></td>
-	</tr> 
+	</tr>
+   
 </table>
+
 
             
 <div class="row">
@@ -195,7 +194,9 @@
 
 $(document).ready(function(){
   var data = [
-    ['MySQL 5.0', 12],['MySQL 5.1', 9], ['MySQL 5.5', 14],['MySQL 5.6', 16]
+  <?php if(!empty($mysql_versions)) { foreach($mysql_versions as $item){ ?>
+    ["<?php echo $item['versions']?>(<?php echo $item['num']?>)", <?php echo $item['num']?> ],
+  <?php }} ?>
   ];
   var plot1 = jQuery.jqplot ('mysql_version', [data], 
     { 
@@ -215,7 +216,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   var data = [
-    ['连接正常主机', 65],['连接异常主机', 2]
+    ["连接成功主机(<?php echo $mysql_statistics['normal_mysql_instance']; ?>)", <?php echo $mysql_statistics['normal_mysql_instance']; ?>],["连接失败主机(<?php echo $mysql_statistics['exception_mysql_instance']; ?>)", <?php echo $mysql_statistics['exception_mysql_instance'];?> ]
   ];
   var plot1 = jQuery.jqplot ('mysql_status', [data], 
     { 
@@ -235,7 +236,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   var data = [
-    ['复制正常主机', 2],['复制异常主机', 0]
+    ["复制正常主机(<?php echo $mysql_statistics['normal_mysql_replication']; ?>)", <?php echo $mysql_statistics['normal_mysql_replication']; ?> ],["复制异常主机(<?php echo $mysql_statistics['exception_mysql_replication']; ?>)", <?php echo $mysql_statistics['exception_mysql_replication']; ?> ]
   ];
   var plot1 = jQuery.jqplot ('mysql_replication', [data], 
     { 
@@ -252,6 +253,9 @@ $(document).ready(function(){
     }
   );
 });
+
+
+
 	
 </script>
 	

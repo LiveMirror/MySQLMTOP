@@ -4,20 +4,14 @@
   <h2>用户管理<small></small></h2>
 </div>
   
-<!--
-                <div class="ui-widget">
-                  <div class="ui-state-highlight   ui-corner-all">
-                    <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
-                    <strong>Alert:</strong> Sample ui-state-error style.</p>
-                  </div>
+<div class="btn-toolbar">
+                <div class="btn-group">
+                  <a class="btn btn-default " href="<?php echo site_url('user/add') ?>"><i class="fui-new-16"></i>&nbsp;新增</a>
+                  <a class="btn btn-default active" href="<?php echo site_url('user/index') ?>"><i class="fui-menu-16"></i>&nbsp;列表</a>
                 </div>
--->
-
-<div class="btn-group">
-  <a  href="<?php echo site_url('user/add') ?>"  class="btn "><i class="icon-pencil"></i>新增</a>
-  <a  href="<?php echo site_url('user/index') ?>"  class="btn "><i class="icon-list"></i>列表</a>
-</div>
-<hr />                
+</div> <!-- /toolbar -->               
+<hr/> 
+               
 <table class="table table-hover table-striped  table-bordered table-condensed">
 	<tr>
 		<th>用户名</th>

@@ -3,6 +3,9 @@
 class Application extends Front_Controller {
     function __construct(){
 		parent::__construct();
+        if($this->session->userdata('username')!='admin') {
+            redirect(site_url());  
+        }
         $this->load->model('application_model','app');
 		$this->load->library('form_validation');
 	

@@ -5,11 +5,14 @@
 </div>
   
 
-<div class="btn-group">
-  <a  href="<?php echo site_url('user/add') ?>"  class="btn "><i class="icon-pencil"></i>新增</a>
-  <a  href="<?php echo site_url('user/index') ?>"  class="btn "><i class="icon-list"></i>列表</a>
-</div>
-<hr />                 
+<div class="btn-toolbar">
+                <div class="btn-group">
+                  <a class="btn btn-default active" href="<?php echo site_url('user/add') ?>"><i class="fui-new-16"></i>&nbsp;新增</a>
+                  <a class="btn btn-default 
+                  " href="<?php echo site_url('user/index') ?>"><i class="fui-menu-16"></i>&nbsp;列表</a>
+                </div>
+</div> <!-- /toolbar -->               
+<hr/>                
 
 <?php if ($error_code!==0) { ?>
 <div class="ui-widget">

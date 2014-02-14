@@ -34,8 +34,8 @@ MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完
   </select>
   <select name="role" class="input-small" >
   <option value="">角色</option>
-  <option value="master" <?php if($setval['role']=='master') echo "selected"; ?> >主库</option>
-  <option value="slave" <?php if($setval['role']=='slave') echo "selected"; ?> >备库</option>
+  <option value="is_master" <?php if($setval['role']=='is_master') echo "selected"; ?> >主库</option>
+  <option value="is_slave" <?php if($setval['role']=='is_slave') echo "selected"; ?> >备库</option>
   </select>
   <select name="delay" class="input-small" style="width: 110px;">
   <option value="">备库延时</option>
@@ -123,7 +123,7 @@ MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完
  <?php foreach ($datalist  as $item):?>
     <tr style="font-size: 12px;">
         <td><?php  echo $item['host'].':'. $item['port'] ?></td>
-        <td><?php echo check_role($item['master'],$item['slave']) ?></td>
+        <td><?php echo check_role($item['is_master'],$item['is_slave']) ?></td>
         <td><?php echo $item['read_only'] ?></td>
         <td><?php echo $item['application'] ?></td>
         <td><?php echo check_value($item['slave_io_run']) ?></td>
