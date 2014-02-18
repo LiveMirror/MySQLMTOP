@@ -26,20 +26,14 @@ class Login extends CI_Controller  {
 		if(isset($_POST['login']) && $_POST['login']=='doing'){
 			$this->form_validation->set_rules('username',  'lang:username', 'trim|required');
 			$this->form_validation->set_rules('password',  'lang:password', 'trim|required|min_length[5]|max_length[18]');
-			$this->form_validation->set_rules('captcha',  'lang:captcha', 'trim|required|numeric');
+	
 			if ($this->form_validation->run() == FALSE)
 			{
 				$data['error_code']='validation_error';
 			}
 			else
 			{
-				//检查验证码
 				
-				if(strcasecmp($this->input->post('captcha'),$this->session->userdata('login_captcha'))!=0)
-				{
-					$data['error_code']='captcha_error';
-				}
-				else{
 					$user_data=$this->user->check_user();
 					if(!$user_data){
 						$data['error_code']='user_check_fail';
@@ -62,7 +56,7 @@ class Login extends CI_Controller  {
 						//登录成功,跳转至登录前页面
 						redirect($this->input->post('return_url'));
 					}	
-				}
+				
 			}
 		}
 		

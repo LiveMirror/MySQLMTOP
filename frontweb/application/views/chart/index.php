@@ -12,9 +12,11 @@
 
   <select name="server_id" class="input-medium" style="" >
   <option value="">选择主机</option>
+  <?php if(!empty($server)) {?>
   <?php foreach ($server as $item):?>
   <option value="<?php echo $item['id'];?>"  ><?php echo $item['host'];?>:<?php echo $item['port'];?></option>
    <?php endforeach;?>
+   <?php } ?>
   </select>
 
  <select name="time" class="input-small" style="width: 120px;">
@@ -38,9 +40,11 @@
 <div id="navcontainer">
 <div class="title">主机列表</div>
 <ul id="navlist">
+  <?php if(!empty($server)) {?>
   <?php foreach ($server as $item):?>
 <li <?php if($cur_server_id==$item['id']){ ?> class='active' <?php } ?> ><a href="<?php echo  site_url('chart/index/'.$item['id']) ?>"><?php echo $item['host'];?>:<?php echo $item['port'];?></a></li>
-  <?php endforeach;?>              	
+  <?php endforeach;?> 
+   <?php } ?>             	
 </ul>
 </div>
 </div>

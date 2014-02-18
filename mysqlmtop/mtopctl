@@ -18,15 +18,42 @@ else
 fi
 
 arg=$1
+mtop_process=`ps -ef|grep mtop |grep -v grep|wc -l`
 case "$arg" in
+  'status')
+    #check mtop status
+    if [ $mtop_process -ge "5" ];then
+       echo "mysql mtop is run!"
+    else
+       echo "mysql mtop is not run!"
+    fi
+  ;;
+
   'start')
     #start mtop
-    cd $basedir && nohup ./mtop.py & > /dev/null 2>&1
+    if [ $mtop_process -ge "5" ];then
+       echo "mysql mtop is already run!"
+    else
+       cd $basedir && nohup ./mtopd.py & > /dev/null 2>&1
+       sleep 1
+       mtop_process=`ps -ef|grep mtop |grep -v grep|wc -l`
+       if [ $mtop_process -ge "5" ];then
+          echo "mysql mtop start success!"
+       else
+          echo "mysql mtop start fail!"
+       fi
+    fi
   ;;
+
   'stop')
     #stop mtop
-    killall python & > /dev/null 2>&1 
+    if [ $mtop_process -le "5" ];then
+       echo "mysql mtop is not run..."
+    else
+       ps -ef |grep -i -E "mtopctl|mtopd.py"|grep -v -E "vi|grep"|awk '{print $2}' |while read line; do kill $line; echo "mtop processes id $line been stop"; done 
+    fi
   ;;
+
   '--help')
     #for help
     echo "mysql mtop help:"
@@ -34,6 +61,7 @@ case "$arg" in
     echo "===================================================================="
     echo "start        Start mysql mtop monitor server; Command: #mtopctl start"
     echo "stop         Stop mysql mtop monitor server; Command: #mtopctl stop"
+    echo "status       Check mysql mtop monitor run status; Command: #mtopctl status"
   ;;
     *)
         echo "Please input  --help to read the help info."

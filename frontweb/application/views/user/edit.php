@@ -67,7 +67,9 @@
         </select>
     </div>
    </div>
-   <?php } ?>
+   <?php }else{ ?>
+        <input type='hidden'  name='status' value="1" />
+   <?php } ?> 
 
   <div class="control-group">
     <div class="controls">

@@ -1,14 +1,19 @@
 #!//bin/env python
 #coding:utf-8
+import os
+import sys
+import string
+import time
+import datetime
 import MySQLdb
-import os, sys, string, time, datetime
 import global_functions as func
 from multiprocessing import Process;
+
 
 def check_mysql_status_ext(host,port,user,passwd,server_id):
     datalist=[]
     try:
-        connect=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),charset='utf8')
+        connect=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=2,charset='utf8')
         cur=connect.cursor()
         connect.select_db('information_schema')
 
@@ -61,19 +66,17 @@ def check_mysql_status_ext(host,port,user,passwd,server_id):
       
         cur.close()
         connect.close()
-
         sql="insert into mysql_status_ext(server_id,QPS,TPS,Bytes_received,Bytes_sent) values(%s,%s,%s,%s,%s)"
         param=(server_id,QPS,TPS,Bytes_received,Bytes_sent)
         func.mysql_exec(sql,param)
     except MySQLdb.Error,e:
+        print "Mysql Error %d: %s" %(e.args[0],e.args[1])
         sql="insert into mysql_status_ext(server_id,QPS,TPS,Bytes_received,Bytes_sent) values(%s,%s,%s,%s,%s)"
         param=(server_id,0,0,0,0)
         func.mysql_exec(sql,param)
-        print "Mysql Error %d: %s" %(e.args[0],e.args[1])
 
 
 def main():
-
     func.mysql_exec("insert into mysql_status_ext_history(server_id,QPS,TPS,Bytes_received,Bytes_sent,create_time,YmdHi) select server_id,QPS,TPS,Bytes_received,Bytes_sent,create_time,LEFT(REPLACE(REPLACE(REPLACE(create_time,'-',''),' ',''),':',''),12) from mysql_status_ext;",'')
     func.mysql_exec("delete from  mysql_status_ext",'')
     #get mysql servers list
@@ -81,7 +84,7 @@ def main():
     passwd = func.get_config('mysql_db','password')
     servers=func.mysql_query("select id,host,port,status from servers where is_delete=0;")
     if servers:
-        print("%s: controller started." % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),));
+        print("%s: check_mysql_status_ext controller started." % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),));
         plist = []
         for row in servers:
             server_id=row[0]
@@ -95,7 +98,7 @@ def main():
 
         for p in plist:
             p.join()
-        print("%s: controller finished." % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),))
+        print("%s: check_mysql_status_ext controller finished." % (time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),))
                      
 
 if __name__=='__main__':
