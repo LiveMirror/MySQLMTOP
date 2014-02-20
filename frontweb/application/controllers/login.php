@@ -63,20 +63,7 @@ class Login extends CI_Controller  {
 		/*
 		 * 页面展示和输出部分
 		*/
-		//生成验证码
-		$this->load->helper('captcha');
-		$vals = array(
-				'word' => rand(100000,1000000),
-				'img_path' => './attachments/captcha/',
-				'img_url' =>base_url()."attachments/captcha/",
-				'img_width' => '150',
-				'img_height' => '40',
-				'expiration' => 7200
-		);
 		
-		$cap = create_captcha($vals);
-		$this->session->set_userdata('login_captcha',$cap['word']);//造验证码的时候要把word放到session里面。
-		$data['captcha']=$cap['image'];
 		$data['cur_nav']='user';
 		$data['site_title']='用户登录';
 	 	$data['return_url'] = isset($_GET['return_url']) ? $_GET['return_url'] : base_url();	 //登录后返回url
