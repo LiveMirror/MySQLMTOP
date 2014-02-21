@@ -56,7 +56,7 @@
 <input type="hidden" name="ids[]" value="<?php echo $n ?>" /> 
     <tr style="font-size: 13px;">
 		<td><input type="text" name="host_<?php echo $n ?>" class="input-small" placeholder="IP或域名"></td>
-        <td><input type="text" name="port_<?php echo $n ?>" class="input-mini" placeholder="端口"></td>
+        <td><input type="text" name="port_<?php echo $n ?>" class="input-mini" placeholder="端口" value="3306"></td>
         <td><select name="application_id_<?php echo $n ?>" id="application_id_<?php echo $n ?>" class="input-medium">
         <option value=""  >选择应用</option>
         <?php if(!empty($application)) {?>

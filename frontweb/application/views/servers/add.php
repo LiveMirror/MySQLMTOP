@@ -37,7 +37,7 @@
    <div class="control-group">
     <label class="control-label" for="">*端口</label>
     <div class="controls">
-      <input type="text" id=""  name="port" value="<?php echo set_value('port'); ?>" >
+      <input type="text" id=""  name="port" value="<?php echo set_value('port','3306'); ?>" >
       <span class="help-inline"></span>
     </div>
    </div>

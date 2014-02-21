@@ -36,6 +36,12 @@ $lang['old_password']			= "当前密码";
 $lang['new_password']			= "新密码";
 $lang['new_password_conf']			= "重复新密码";
 
+$lang['name']			= "名称";
+$lang['display_name']			= "显示名";
+$lang['host']			= "主机";
+$lang['application']			= "应用";
+$lang['application_id']			= "应用";
+
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */

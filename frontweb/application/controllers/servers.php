@@ -211,7 +211,7 @@ class Servers extends Front_Controller {
             for($n=1;$n<=10;$n++){
 			  $host = $this->input->post('host_'.$n);
               $port = $this->input->post('port_'.$n);
-              $application = $this->input->post('application_'.$n);
+              $application = $this->input->post('application_id_'.$n);
               if(!empty($host) && !empty($port) && !empty($application)){
                  $data['error_code']=0;
 					$data = array(
