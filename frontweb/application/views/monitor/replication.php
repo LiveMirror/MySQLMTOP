@@ -101,7 +101,6 @@ MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完
         <th colspan="2"><center>主库信息</center></th>
 		<th colspan="2"><center>当前二进制日志</center></th>
 		<th colspan="2"><center>主库二进制日志</center></th>
-
 	</tr>
     <tr>
         <th>主机</th>
@@ -128,14 +127,13 @@ MySQLMTOP温馨提示：1.启动自动刷新后每30秒刷新一次; 2.只有完
         <td><?php echo $item['application'] ?></td>
         <td><?php echo check_value($item['slave_io_run']) ?></td>
         <td><?php echo check_value($item['slave_sql_run']) ?></td>
-		<td><?php echo check_delay($item['delay']) ?></td>
+		<td><?php if($item['is_slave']=='1' and $item['slave_io_run']=='Yes' and $item['slave_sql_run']=='Yes'){?><a href="<?php echo site_url('chart/replication/'.$item['server_id']) ?>"><img src="./img/chart.gif"/></a><?php } ?>&nbsp;<?php echo check_delay($item['delay']) ?>  </td>
         <td><?php echo check_value($item['master_server']) ?></td>
         <td><?php echo check_value($item['master_port']) ?></td>
         <td><?php echo $item['current_binlog_file'] ?></td>
         <td><?php echo $item['current_binlog_pos'] ?></td>
         <td><?php echo $item['master_binlog_file'] ?></td>
         <td><?php echo $item['master_binlog_pos'] ?></td>
-       
         
 	</tr>
  <?php endforeach;?>

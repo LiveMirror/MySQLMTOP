@@ -3,7 +3,7 @@
 <script language="javascript" src="js/DatePicker/WdatePicker.js"></script>
 
 <div class="page-header">
-  <h2>MySQL 慢查询分析平台<small> </small></h2>
+  <h2>MySQL 慢查询日志分析平台<small> </small></h2>
 </div>
 
 

@@ -206,7 +206,7 @@ function check_delay($data){
         $data=$H.':'.$i.':'.$s;
     }
     else{
-        echo $data='1天以上'; 
+        $data='1天以上'; 
     }
     
     if($data =="00:00:00"){
