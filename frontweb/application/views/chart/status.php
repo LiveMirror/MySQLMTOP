@@ -19,8 +19,12 @@
             
 <hr/>
 
-<div id="active" style="margin-top:5px; margin-left:0px; width:1250px; height:320px;"></div>
-<div id="connections" style="margin-top:5px; margin-left:0px; width:1250px; height:320px;"></div>
+<div id="active" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
+<div id="connections" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
+<div id="QPS" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
+<div id="TPS" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
+<div id="Bytes_received" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
+<div id="Bytes_sent" style="margin-top:5px; margin-left:0px; width:1200px; height:320px;"></div>
 
 
 <script src="./bootstrap/js/jquery-1.9.0.min.js"></script>
@@ -99,6 +103,194 @@ $(document).ready(function(){
     },
     title:{
          text:"总连接数图表 当前主机:<?php echo $cur_server; ?>",
+         show:true,
+         fontSize:'13px',
+         textColor:'#666',
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:"<?php echo $chart_option['formatString']; ?>"},
+            tickInterval:"",
+            label: "",
+        },
+        yaxis: {  
+                renderer: $.jqplot.LogAxisRenderer,
+                tickOptions:{ suffix: '' } 
+        } 
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: '',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{showMarker:false, lineWidth:2, markerOptions:{style:'filledCircle'}}]
+  });
+});
+
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($chart_reslut)) { foreach($chart_reslut as $item){ ?>
+    ["<?php echo $item['time']?>", <?php echo $item['QPS']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('QPS', [data1], {
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    title:{
+         text:"QPS图表 当前主机:<?php echo $cur_server; ?>",
+         show:true,
+         fontSize:'13px',
+         textColor:'#666',
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:"<?php echo $chart_option['formatString']; ?>"},
+            tickInterval:"",
+            label: "",
+        },
+        yaxis: {  
+                renderer: $.jqplot.LogAxisRenderer,
+                tickOptions:{ suffix: '' } 
+        } 
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: '',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{showMarker:false, lineWidth:2, markerOptions:{style:'filledCircle'}}]
+  });
+});
+
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($chart_reslut)) { foreach($chart_reslut as $item){ ?>
+    ["<?php echo $item['time']?>", <?php echo $item['TPS']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('TPS', [data1], {
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    title:{
+         text:"TPS图表 当前主机:<?php echo $cur_server; ?>",
+         show:true,
+         fontSize:'13px',
+         textColor:'#666',
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:"<?php echo $chart_option['formatString']; ?>"},
+            tickInterval:"",
+            label: "",
+        },
+        yaxis: {  
+                renderer: $.jqplot.LogAxisRenderer,
+                tickOptions:{ suffix: '' } 
+        } 
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: '',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{showMarker:false, lineWidth:2, markerOptions:{style:'filledCircle'}}]
+  });
+});
+
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($chart_reslut)) { foreach($chart_reslut as $item){ ?>
+    ["<?php echo $item['time']?>", <?php echo $item['Bytes_received']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('Bytes_received', [data1], {
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    title:{
+         text:"接收流量图表 当前主机:<?php echo $cur_server; ?>",
+         show:true,
+         fontSize:'13px',
+         textColor:'#666',
+    },
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            tickOptions:{formatString:"<?php echo $chart_option['formatString']; ?>"},
+            tickInterval:"",
+            label: "",
+        },
+        yaxis: {  
+                renderer: $.jqplot.LogAxisRenderer,
+                tickOptions:{ suffix: '' } 
+        } 
+    },
+    highlighter: {
+            show: true, 
+            showLabel: true, 
+            tooltipAxes: '',
+            sizeAdjust: 7.5 , tooltipLocation : 'ne'
+    },
+    cursor:{
+            show: true, 
+            zoom: true
+    },
+    series:[{showMarker:false, lineWidth:2, markerOptions:{style:'filledCircle'}}]
+  });
+});
+
+
+$(document).ready(function(){
+  var data1=[
+    <?php if(!empty($chart_reslut)) { foreach($chart_reslut as $item){ ?>
+    ["<?php echo $item['time']?>", <?php echo $item['Bytes_sent']?> ],
+    <?php }}else{ ?>
+    []    
+    <?php } ?>
+  ];
+  var plot1 = $.jqplot('Bytes_sent', [data1], {
+    seriesDefaults: {
+          rendererOptions: {
+              smooth: true
+          }
+    },
+    title:{
+         text:"发送流量图表 当前主机:<?php echo $cur_server; ?>",
          show:true,
          fontSize:'13px',
          textColor:'#666',
