@@ -16,7 +16,7 @@
     <tr>
 		<th>主机IP</th>
 	
-        <th>HOSTNAME</th>
+        <th>主机名</th>
         <th>系统内核</th>
 		<th>load1</th>
 		<th>load5</th>
