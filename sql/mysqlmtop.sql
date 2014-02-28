@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.0.2.47
+Source Server         : 10.0.2.47-gos-log-slave
 Source Server Version : 50518
 Source Host           : 10.0.2.47:3306
 Source Database       : test
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50518
 File Encoding         : 65001
 
-Date: 2014-02-15 21:12:52
+Date: 2014-02-28 13:50:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,7 +133,6 @@ CREATE TABLE `linux_resource_history` (
   KEY `idx_union_1` (`ip`,`create_time`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-
 -- ----------------------------
 -- Table structure for mysql_process
 -- ----------------------------
@@ -196,7 +195,7 @@ CREATE TABLE `mysql_replication` (
 DROP TABLE IF EXISTS `mysql_replication_history`;
 CREATE TABLE `mysql_replication_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `server_id` smallint(4) DEFAULT NULL,
+  `server_id` smallint(4) NOT NULL,
   `application_id` smallint(4) DEFAULT NULL,
   `is_master` tinyint(2) DEFAULT '0',
   `is_slave` tinyint(2) DEFAULT '0',
@@ -211,12 +210,35 @@ CREATE TABLE `mysql_replication_history` (
   `master_binlog_file` varchar(30) DEFAULT NULL,
   `master_binlog_pos` varchar(30) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `YmdHi` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `YmdHi` bigint(18) DEFAULT NULL,
+  PRIMARY KEY (`id`,`server_id`),
   KEY `idx_application_id` (`application_id`),
-  KEY `idx_server_id` (`server_id`),
-  KEY `idx_create_time` (`create_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  KEY `idx_create_time` (`create_time`),
+  KEY `idx_union_1` (`server_id`,`YmdHi`) USING BTREE,
+  KEY `idx_ymdhi` (`YmdHi`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+/*!50500 PARTITION BY RANGE  COLUMNS(server_id)
+(PARTITION server_1 VALUES LESS THAN (2) ENGINE = InnoDB,
+ PARTITION server_2 VALUES LESS THAN (3) ENGINE = InnoDB,
+ PARTITION server_3 VALUES LESS THAN (4) ENGINE = InnoDB,
+ PARTITION server_4 VALUES LESS THAN (5) ENGINE = InnoDB,
+ PARTITION server_5 VALUES LESS THAN (6) ENGINE = InnoDB,
+ PARTITION server_6 VALUES LESS THAN (7) ENGINE = InnoDB,
+ PARTITION server_7 VALUES LESS THAN (8) ENGINE = InnoDB,
+ PARTITION server_8 VALUES LESS THAN (9) ENGINE = InnoDB,
+ PARTITION server_9 VALUES LESS THAN (10) ENGINE = InnoDB,
+ PARTITION server_10 VALUES LESS THAN (11) ENGINE = InnoDB,
+ PARTITION server_11 VALUES LESS THAN (12) ENGINE = InnoDB,
+ PARTITION server_12 VALUES LESS THAN (13) ENGINE = InnoDB,
+ PARTITION server_13 VALUES LESS THAN (14) ENGINE = InnoDB,
+ PARTITION server_14 VALUES LESS THAN (15) ENGINE = InnoDB,
+ PARTITION server_15 VALUES LESS THAN (16) ENGINE = InnoDB,
+ PARTITION server_16 VALUES LESS THAN (17) ENGINE = InnoDB,
+ PARTITION server_17 VALUES LESS THAN (18) ENGINE = InnoDB,
+ PARTITION server_18 VALUES LESS THAN (19) ENGINE = InnoDB,
+ PARTITION server_19 VALUES LESS THAN (20) ENGINE = InnoDB,
+ PARTITION server_20 VALUES LESS THAN (21) ENGINE = InnoDB,
+ PARTITION server_other VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB) */;
 
 -- ----------------------------
 -- Table structure for mysql_slow_query_review
@@ -375,17 +397,40 @@ CREATE TABLE `mysql_status_ext` (
 DROP TABLE IF EXISTS `mysql_status_ext_history`;
 CREATE TABLE `mysql_status_ext_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `server_id` smallint(4) DEFAULT NULL,
+  `server_id` smallint(4) NOT NULL,
   `QPS` int(10) DEFAULT NULL,
   `TPS` int(10) DEFAULT NULL,
   `Bytes_received` int(10) DEFAULT NULL,
   `Bytes_sent` int(10) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `YmdHi` varchar(100) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `idx_union_1` (`server_id`,`create_time`) USING BTREE,
-  KEY `idx_ymdhi` (`YmdHi`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  `YmdHi` bigint(18) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`server_id`),
+  KEY `idx_ymdhi` (`YmdHi`) USING BTREE,
+  KEY `idx_union_1` (`server_id`,`YmdHi`) USING BTREE,
+  KEY `idx_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+/*!50500 PARTITION BY RANGE  COLUMNS(server_id)
+(PARTITION server_1 VALUES LESS THAN (2) ENGINE = InnoDB,
+ PARTITION server_2 VALUES LESS THAN (3) ENGINE = InnoDB,
+ PARTITION server_3 VALUES LESS THAN (4) ENGINE = InnoDB,
+ PARTITION server_4 VALUES LESS THAN (5) ENGINE = InnoDB,
+ PARTITION server_5 VALUES LESS THAN (6) ENGINE = InnoDB,
+ PARTITION server_6 VALUES LESS THAN (7) ENGINE = InnoDB,
+ PARTITION server_7 VALUES LESS THAN (8) ENGINE = InnoDB,
+ PARTITION server_8 VALUES LESS THAN (9) ENGINE = InnoDB,
+ PARTITION server_9 VALUES LESS THAN (10) ENGINE = InnoDB,
+ PARTITION server_10 VALUES LESS THAN (11) ENGINE = InnoDB,
+ PARTITION server_11 VALUES LESS THAN (12) ENGINE = InnoDB,
+ PARTITION server_12 VALUES LESS THAN (13) ENGINE = InnoDB,
+ PARTITION server_13 VALUES LESS THAN (14) ENGINE = InnoDB,
+ PARTITION server_14 VALUES LESS THAN (15) ENGINE = InnoDB,
+ PARTITION server_15 VALUES LESS THAN (16) ENGINE = InnoDB,
+ PARTITION server_16 VALUES LESS THAN (17) ENGINE = InnoDB,
+ PARTITION server_17 VALUES LESS THAN (18) ENGINE = InnoDB,
+ PARTITION server_18 VALUES LESS THAN (19) ENGINE = InnoDB,
+ PARTITION server_19 VALUES LESS THAN (20) ENGINE = InnoDB,
+ PARTITION server_20 VALUES LESS THAN (21) ENGINE = InnoDB,
+ PARTITION server_other VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB) */;
 
 -- ----------------------------
 -- Table structure for mysql_status_history
@@ -393,7 +438,7 @@ CREATE TABLE `mysql_status_ext_history` (
 DROP TABLE IF EXISTS `mysql_status_history`;
 CREATE TABLE `mysql_status_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `server_id` smallint(4) DEFAULT NULL,
+  `server_id` smallint(4) NOT NULL,
   `application_id` smallint(4) DEFAULT NULL,
   `connect` varchar(20) DEFAULT NULL,
   `uptime` int(11) NOT NULL DEFAULT '0',
@@ -401,11 +446,34 @@ CREATE TABLE `mysql_status_history` (
   `connections` varchar(20) DEFAULT NULL,
   `active` varchar(20) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `YmdHi` varchar(100) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `idx_union_1` (`server_id`,`create_time`),
-  KEY `idx_ymdhi` (`YmdHi`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  `YmdHi` bigint(18) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`server_id`),
+  KEY `idx_ymdhi` (`YmdHi`) USING BTREE,
+  KEY `idx_union_1` (`server_id`,`YmdHi`) USING BTREE,
+  KEY `idx_create_time` (`create_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+/*!50500 PARTITION BY RANGE  COLUMNS(server_id)
+(PARTITION server_1 VALUES LESS THAN (2) ENGINE = InnoDB,
+ PARTITION server_2 VALUES LESS THAN (3) ENGINE = InnoDB,
+ PARTITION server_3 VALUES LESS THAN (4) ENGINE = InnoDB,
+ PARTITION server_4 VALUES LESS THAN (5) ENGINE = InnoDB,
+ PARTITION server_5 VALUES LESS THAN (6) ENGINE = InnoDB,
+ PARTITION server_6 VALUES LESS THAN (7) ENGINE = InnoDB,
+ PARTITION server_7 VALUES LESS THAN (8) ENGINE = InnoDB,
+ PARTITION server_8 VALUES LESS THAN (9) ENGINE = InnoDB,
+ PARTITION server_9 VALUES LESS THAN (10) ENGINE = InnoDB,
+ PARTITION server_10 VALUES LESS THAN (11) ENGINE = InnoDB,
+ PARTITION server_11 VALUES LESS THAN (12) ENGINE = InnoDB,
+ PARTITION server_12 VALUES LESS THAN (13) ENGINE = InnoDB,
+ PARTITION server_13 VALUES LESS THAN (14) ENGINE = InnoDB,
+ PARTITION server_14 VALUES LESS THAN (15) ENGINE = InnoDB,
+ PARTITION server_15 VALUES LESS THAN (16) ENGINE = InnoDB,
+ PARTITION server_16 VALUES LESS THAN (17) ENGINE = InnoDB,
+ PARTITION server_17 VALUES LESS THAN (18) ENGINE = InnoDB,
+ PARTITION server_18 VALUES LESS THAN (19) ENGINE = InnoDB,
+ PARTITION server_19 VALUES LESS THAN (20) ENGINE = InnoDB,
+ PARTITION server_20 VALUES LESS THAN (21) ENGINE = InnoDB,
+ PARTITION server_other VALUES LESS THAN (MAXVALUE) ENGINE = InnoDB) */;
 
 -- ----------------------------
 -- Table structure for mysql_widget_bigtable
