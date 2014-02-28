@@ -9,7 +9,7 @@ ALTER TABLE `mysql_replication_history`
 ADD INDEX `idx_ymdhi` (`YmdHi`) USING BTREE ;
 
 ALTER TABLE `mysql_replication_history`
-ADD INDEX `idx_create_time` (`create_time`) USING BTREE ;
+DROP INDEX `idx_server_id` ;
 
 ALTER TABLE `mysql_replication_history`
 MODIFY COLUMN `server_id`  smallint(4) NOT NULL AFTER `id`,
@@ -40,9 +40,6 @@ PARTITION BY RANGE COLUMNS(server_id) (
     PARTITION server_20 VALUES LESS THAN (21),
     PARTITION server_other VALUES LESS THAN MAXVALUE
 );
-
-
-
 
 
 ALTER TABLE `mysql_status_history`
@@ -86,16 +83,12 @@ PARTITION BY RANGE COLUMNS(server_id) (
 );
 
 
-
-
-
 ALTER TABLE `mysql_status_ext_history`
 MODIFY COLUMN `YmdHi`  bigint(18) NOT NULL DEFAULT 0 AFTER `create_time`;
 
 ALTER TABLE `mysql_status_ext_history`
-DROP INDEX `idx_server_id` ,
+DROP INDEX `idx_union_1` ,
 ADD INDEX `idx_union_1` (`server_id`, `YmdHi`) USING BTREE ;
-
 
 ALTER TABLE `mysql_status_ext_history`
 MODIFY COLUMN `server_id`  smallint(4) NOT NULL AFTER `id`,
