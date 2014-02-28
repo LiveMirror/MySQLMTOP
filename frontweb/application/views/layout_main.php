@@ -69,7 +69,6 @@
                 <li <?php if($cur_nav=='monitor_process') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/process') ?>">进程监控</a></li>
                 <li <?php if($cur_nav=='monitor_replication') echo "class=active"; ?> ><a href="<?php echo site_url('monitor/replication') ?>">复制监控</a></li>
                 <li <?php if($cur_nav=='slowquery_index') echo "class=active"; ?> ><a href="<?php echo site_url('slowquery/index') ?>">慢查询分析</a></li>
-                <li <?php if($cur_nav=='chart_index') echo "class=active"; ?> ><a href="<?php echo site_url('chart/index') ?>">性能图表</a></li>
                 <li <?php if($cur_nav=='widget') echo "class=active"; ?> ><a href="<?php echo site_url('widget/index') ?>">工具组件</a></li>
                 <li <?php if($cur_nav=='alarm_index') echo "class=active"; ?> ><a href="<?php echo site_url('alarm/index') ?>">告警事件</a></li>
                 <li <?php if($cur_nav=='linux') echo "class=active"; ?> ><a href="<?php echo site_url('linux/index') ?>">系统资源</a></li>
@@ -81,7 +80,7 @@
                               <li <?php if($cur_nav=='servers') echo "class=active"; ?> ><a href="<?php echo site_url('servers/index') ?>">主机管理</a></li>
                               <li <?php if($cur_nav=='user_index') echo "class=active"; ?> ><a href="<?php echo site_url('user/index') ?>">用户管理</a></li>
                               <li <?php if($cur_nav=='user_password') echo "class=active"; ?> ><a href="<?php echo site_url('user/password') ?>">更改密码</a></li>
-                              <li <?php if($cur_nav=='user_logout') echo "class=active"; ?> ><a href="<?php echo site_url('user/logout') ?>">退出系统</a></li>
+                              <li <?php if($cur_nav=='login_logout') echo "class=active"; ?> ><a href="<?php echo site_url('login/logout') ?>">退出系统</a></li>
                        </ul> <!-- /Sub menu -->
                 </li>
                 <?php } ?>

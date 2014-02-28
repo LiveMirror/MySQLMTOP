@@ -27,7 +27,7 @@ passwd = get_config('monitor_server','passwd')
 dbname = get_config('monitor_server','dbname')
 
 def mysql_exec(sql,param):
-    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),charset='utf8')
+    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=5,charset='utf8')
     conn.select_db(dbname)
     cursor = conn.cursor()
     if param <> '':
@@ -39,7 +39,7 @@ def mysql_exec(sql,param):
     conn.close()
 
 def mysql_query(sql):
-    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),charset='utf8')
+    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=5,charset='utf8')
     conn.select_db(dbname)
     cursor = conn.cursor()
     count=cursor.execute(sql)
@@ -52,7 +52,7 @@ def mysql_query(sql):
     conn.close()
 
 def get_option(key):
-    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),charset='utf8')
+    conn=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=5,charset='utf8')
     conn.select_db(dbname)
     cursor = conn.cursor()
     sql="select value from options where name=+'"+key+"'"
