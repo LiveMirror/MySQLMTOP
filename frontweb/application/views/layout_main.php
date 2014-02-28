@@ -100,7 +100,7 @@
 <div class="container-fluid">
     <hr>
 
-        <p>&copy; MySQLMTOP V2.0 2013 <a href="http://www.mtop.cc" target="_blank">www.mtop.cc</a> 版权所有 Power By <a href="http://www.ruzuojun.com" target="_blank">Ruzuojun</a>     <a href="http://www.mtop.cc/manual" target="_blank">在线手册</a> <a href="http://www.mtop.cc/forum" target="_blank">交流社区</a></p>
+        <p>&copy; MySQLMTOP V2.1 2013-2014 <a href="http://www.mtop.cc" target="_blank">www.mtop.cc</a> 版权所有 Power By <a href="http://www.ruzuojun.com" target="_blank">Ruzuojun</a>     <a href="http://www.mtop.cc/manual" target="_blank">在线手册</a> <a href="http://www.mtop.cc/forum" target="_blank">交流社区</a></p>
 
 </div>
 
