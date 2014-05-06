@@ -9,7 +9,7 @@ import global_functions as func
 
 def job_run(script_name,times):
     while True:
-        os.system("./"+script_name)
+        os.system("python "+script_name)
         time.sleep(int(times))
 
 
