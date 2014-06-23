@@ -15,13 +15,10 @@ def check_mysql_process(host,port,user,passwd,server_id,application_id):
         connect=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=2,charset='utf8')
         cur=connect.cursor()
         connect.select_db('information_schema')
-        processlist=cur.execute('select * from information_schema.processlist where Command !="Sleep" and DB !="information_schema";')
+        processlist=cur.execute('select * from information_schema.processlist where Command !="" and DB !="information_schema";')
         if processlist: 
             for row in cur.fetchall():
-                for r in row:
-                    datalist.append(r)
-                result=datalist
-                #print result
+                result=row
                 sql="insert into mysql_process(server_id,application_id,pid,user,host,db,command,time,status,info) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 param=(server_id,application_id,result[0],result[1],result[2],result[3],result[4],result[5],result[6],result[7])
                 func.mysql_exec(sql,param)

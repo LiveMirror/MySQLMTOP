@@ -14,7 +14,7 @@ def check_mysql_replication(host,port,user,passwd,server_id,application_id):
         connect=MySQLdb.connect(host=host,user=user,passwd=passwd,port=int(port),connect_timeout=2,charset='utf8')
         cur=connect.cursor()
         connect.select_db('information_schema')
-        master_thread=cur.execute("select * from information_schema.processlist where COMMAND = 'Binlog Dump';")
+        master_thread=cur.execute("select * from information_schema.processlist where COMMAND = 'Binlog Dump' or COMMAND = 'Binlog Dump GTID';")
         slave_status=cur.execute('show slave status;')
         datalist=[]
         if master_thread >= 1:
