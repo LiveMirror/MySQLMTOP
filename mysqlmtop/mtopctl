@@ -2,6 +2,12 @@
 
 basedir=""
 
+#check system,This script must be run on CentOS/RHEL only.
+############################################################################
+if [ ! -f /etc/redhat-release ]; then
+    echo "[ERROR]: Sorry, this script is for CentOS/RHEL only."
+    exit 1
+fi
 #check basedir
 #############################################################################
 if test -z "$basedir"
@@ -28,7 +34,7 @@ case "$arg" in
     if [ $mtop_process -ge "5" ];then
        echo "mysql mtop is already run!"
     else
-       cd $basedir && nohup python mtopd.py & > /dev/null 2>&1
+       cd $basedir && nohup ./mtopd.py & > /dev/null 2>&1
        sleep 1
        mtop_process=`ps -ef|grep mtop |grep -v grep|wc -l`
        if [ $mtop_process -ge "5" ];then
@@ -63,4 +69,8 @@ case "$arg" in
 
 esac
 
-exit 0
+exit 0  
+  
+
+
+

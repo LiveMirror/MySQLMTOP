@@ -1,10 +1,10 @@
 #!/bin/bash
 
-host="localhost"
-port="3306"
-user="mtop_user"
-password="password"
-dbname="mysqlmtop"
+host=""
+port=""
+user=""
+password=""
+dbname=""
 
 ip=$1
 kernel=`snmpwalk -v1 -c mysqlmtop  ${ip}  SNMPv2-MIB::sysDescr.0|awk '{print $4 " " $6 " " $15}'`
